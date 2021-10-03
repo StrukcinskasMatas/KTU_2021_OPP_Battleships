@@ -1,10 +1,14 @@
 #!/bin/bash
+
 ./Microsoft.Net.Compilers.3.11.0/tools/csc.exe ./Server/Server/Program.cs 
 mv Program.exe Server.exe
+
 ./Microsoft.Net.Compilers.3.11.0/tools/csc.exe ./Client/Client/Program.cs
-mv Program.exe Client.exe
+mv Program.exe ClientOne.exe
+
 ./Microsoft.Net.Compilers.3.11.0/tools/csc.exe ./Client/Client/Program.cs
-mv Program.exe Client1.exe
+mv Program.exe ClientTwo.exe
+
 start Server.exe
-start Client.exe
-start Client1.exe
+start ClientOne.exe
+start ClientTwo.exe
