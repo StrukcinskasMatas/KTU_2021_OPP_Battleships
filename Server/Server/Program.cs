@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Server
 {
@@ -11,7 +11,6 @@ namespace Server
     {
         private static Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         private static List<Player> players = new List<Player>();
-        private static byte[] _buffer = new byte[1024];
         
         static void Main(string[] args)
         {
@@ -22,29 +21,17 @@ namespace Server
         {
             serverSocket.Bind(new IPEndPoint(IPAddress.Any, 69));
             serverSocket.Listen(10);
-            serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
-            serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null);
-
+            Parallel.Invoke(
+                () => serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null),
+                () => serverSocket.BeginAccept(new AsyncCallback(AcceptCallback), null));
             Console.WriteLine("Server started... to close it, press any key...");
 
             while (players.Count != 2) { }
 
             Console.WriteLine("Two players connected! Starting the game...");
-
-            // TODO: start game
-            foreach (var player in players)
-            {
-                player.getSocket().Send(Encoding.ASCII.GetBytes("(cls)"));
-                player.getSocket().Send(Encoding.ASCII.GetBytes(PrintGrid()));
-            }
-            // TODO: iskelti i nauja funckija ^^
-
+            Game gameInstance = new Game(players);
+            gameInstance.StartGame();
             Console.ReadLine();
-        }
-
-        private static string PrintGrid()
-        {
-            return "00000\n00000\n00000\n00000\n00000\n";
         }
 
         private static void AcceptCallback(IAsyncResult AR)
@@ -54,8 +41,7 @@ namespace Server
             Console.WriteLine("Received a connection!");
 
             // Ask for username
-            byte[] promptBuffer = Encoding.ASCII.GetBytes("(action needed) Please enter your username:");
-            clientSocket.Send(promptBuffer);
+            clientSocket.Send(Encoding.ASCII.GetBytes("(action needed) Please enter your username:"));
 
             // Get username
             byte[] responseBuffer = new byte[1024];
@@ -69,28 +55,6 @@ namespace Server
             {
                 clientSocket.Send(Encoding.ASCII.GetBytes("Waiting for the second player to join..."));
             }
-        }
-    }
-
-    public class Player
-    {
-        private string username;
-        private Socket socket;
-
-        public Player(string username, Socket socket)
-        {
-            this.username = username;
-            this.socket = socket;
-        }
-
-        public string getUsername()
-        {
-            return this.username;
-        }
-
-        public Socket getSocket()
-        {
-            return this.socket;
         }
     }
 }

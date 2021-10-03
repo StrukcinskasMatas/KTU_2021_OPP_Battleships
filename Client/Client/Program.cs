@@ -49,20 +49,21 @@ namespace Client
                 byte[] messageBuffer = new byte[1024];
                 serverSocket.Receive(messageBuffer);
                 string message = Encoding.ASCII.GetString(messageBuffer);
+
+                if (message.Contains("cls"))
+                {
+                    Console.Clear();
+                }
+
                 Console.WriteLine(message); // TODO: make nice message struct
 
                 // Process the server's message
                 if (message.Contains("action needed"))
                 {
-                    Console.Write("Enter command: ");
+                    Console.Write("> ");
                     string command = Console.ReadLine();
                     byte[] commandBuffer = Encoding.ASCII.GetBytes(command);
                     serverSocket.Send(commandBuffer); // need try-catch, perhaps move to another 'SendCommand()' function
-                }
-
-                if (message.Contains("cls"))
-                {
-                    Console.Clear();
                 }
             }
         }
