@@ -9,13 +9,26 @@ namespace Server
 {
     class Game
     {
+        // Singleton instance
+        private static Game instance = null;
+        private Game(List<Player> players)
+        {
+            Console.WriteLine("Game singleton initialized.");
+            this.players = players;
+            this.grid = new Grid(10);
+        }
+
         private Grid grid;
         private List<Player> players;
 
-        public Game(List<Player> players)
+        public static Game getInstance(List<Player> players)
         {
-            this.players = players;
-            this.grid = new Grid(10);
+            if (instance == null)
+            {
+                instance = new Game(players);
+            }
+
+            return instance;
         }
 
         public void StartGame()
@@ -98,33 +111,67 @@ namespace Server
             player.SendMessage("(cls)");
             player.SendMessage(this.grid.PrintGrid(playerID));
 
-            for (int i = 0; i < 3; i++)
+            Units.Creator creator = new Units.BattleshipCreator();
+            int[] shipSizes = new int[] { 1, 1, 1, 2, 2, 2 };
+
+            foreach (var shipSize in shipSizes)
             {
-                player.SendMessage("(action needed) Place your 1x1 ship: (example input: \"1 2\")");
-                List<int> coords = ConvertResponseToCoordsList(player.ReceiveMessage());
+                Units.Battleship battleship = creator.CreateBattleship(shipSize);
+                Units.AbstractFactory unitFactory = battleship.GetAbstractFactory();
+
+                player.SendMessage("(action needed) Choose your ship type: (T)ank or (U)tility:");
+                Units.Unit shipUnit;
+
+                while (true)
+                {
+                    string type = player.ReceiveMessage()[0].ToString(); //TODO: this is a hack, need to fix message sending
+                    switch (type)
+                    {
+                        case "T":
+                            shipUnit = unitFactory.CreateTank();
+                            break;
+                        case "U":
+                            shipUnit = unitFactory.CreateUtility();
+                            break;
+                        default:
+                            player.SendMessage("(action needed) Invalid input.");
+                            continue;
+                    }
+
+                    break;
+                }
 
                 // TODO: validate input if not out of bounds
                 // TODO: validate if ship already placed
-                if (coords.Count == 2)
+                player.SendMessage(String.Format("(action needed) Place your {0} {1} ship: (example coords input: \"1 2\")", shipUnit.GetUnitType(), shipUnit.GetSizeString()));
+                while (true)
                 {
-                    Console.WriteLine("Player " + playerID.ToString() + " placed 1x1 ship at: " + coords[0].ToString() + ", " + coords[1].ToString());
+                    List<int> coords = ConvertResponseToCoordsList(player.ReceiveMessage());
+                    if (coords.Count != 2)
+                    {
+                        player.SendMessage("(action needed) Invalid input.");
+                        continue;
+                    }
+
+                    Console.WriteLine(String.Format("Player {0} placed {1}{2} ship at: {3}, {4}", 
+                        playerID.ToString(), shipUnit.GetUnitType(), shipUnit.GetSizeString(), coords[0].ToString(), coords[1].ToString()));
+
                     Cell cell = grid.GetCell(coords[0], coords[1]);
                     if (cell.GetOwnerID() != playerID)
                     {
                         player.SendMessage("This cell does not belong to you.");
-                        i--;
                         continue;
                     }
 
-                    cell.SetValue('1');
+                    for (int i = 0; i < shipUnit.GetLenght(); i++)
+                    {
+                        Cell cellToChange = grid.GetCell(coords[0], coords[1] + i);
+                        cellToChange.SetValue(shipUnit.GetUnitTypeSymbol());
+                    }
+
                     player.SendMessage("(cls)");
                     player.SendMessage(this.grid.PrintGrid(playerID));
-                }
-                else
-                {
-                    player.SendMessage("Invalid input.");
-                    i--;
-                    continue;
+                    break;
                 }
             }
         }

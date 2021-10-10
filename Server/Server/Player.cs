@@ -27,14 +27,14 @@ namespace Server
 
         public void SendMessage(string message)
         {
-            this.socket.Send(Encoding.ASCII.GetBytes(message));
+            this.socket.Send(Encoding.UTF8.GetBytes(message));
         }
 
         public string ReceiveMessage()
         {
             byte[] responseBuffer = new byte[1024];
             this.socket.Receive(responseBuffer);
-            return Encoding.ASCII.GetString(responseBuffer);
+            return Encoding.UTF8.GetString(responseBuffer);
         }
     }
 }

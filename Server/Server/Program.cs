@@ -29,7 +29,7 @@ namespace Server
             while (players.Count != 2) { }
 
             Console.WriteLine("Two players connected! Starting the game...");
-            Game gameInstance = new Game(players);
+            Game gameInstance = Game.getInstance(players);
             gameInstance.StartGame();
             Console.ReadLine();
         }

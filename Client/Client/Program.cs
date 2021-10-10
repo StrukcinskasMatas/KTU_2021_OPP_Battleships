@@ -48,7 +48,7 @@ namespace Client
                 // Receive a message from the server
                 byte[] messageBuffer = new byte[1024];
                 serverSocket.Receive(messageBuffer);
-                string message = Encoding.ASCII.GetString(messageBuffer);
+                string message = Encoding.UTF8.GetString(messageBuffer);
 
                 if (message.Contains("cls"))
                 {
@@ -62,7 +62,7 @@ namespace Client
                 {
                     Console.Write("> ");
                     string command = Console.ReadLine();
-                    byte[] commandBuffer = Encoding.ASCII.GetBytes(command);
+                    byte[] commandBuffer = Encoding.UTF8.GetBytes(command);
                     serverSocket.Send(commandBuffer); // need try-catch, perhaps move to another 'SendCommand()' function
                 }
             }
