@@ -16,7 +16,7 @@ namespace Server.Units
             xLenght = x;
             yLenght = y;
         }
-
+       
         public override string GetSizeString()
         {
             return String.Format("{0}x{1}", xLenght, yLenght);
@@ -35,6 +35,10 @@ namespace Server.Units
         public override char GetUnitTypeSymbol()
         {
             return 'T';
+        }
+        public override Tank Clone()
+        {
+            return (Tank)this.MemberwiseClone();
         }
     }
 }

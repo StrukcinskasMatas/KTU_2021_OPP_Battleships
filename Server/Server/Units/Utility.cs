@@ -36,5 +36,9 @@ namespace Server.Units
         {
             return 'U';
         }
+        public override Utility Clone()
+        {
+            return (Utility)this.MemberwiseClone();
+        }
     }
 }

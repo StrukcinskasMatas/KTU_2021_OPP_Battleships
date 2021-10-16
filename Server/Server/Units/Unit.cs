@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Server.Units
 {
-    public abstract class Unit
+    public abstract class Unit: ICloneable
     {
         public abstract string GetUnitType();
         public abstract char GetUnitTypeSymbol();
         public abstract string GetSizeString();
         public abstract int GetLenght();
+        public abstract object Clone();
     }
 }

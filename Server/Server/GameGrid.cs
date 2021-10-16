@@ -24,7 +24,21 @@ namespace Server
             }
             this.grid = grid;
         }
-
+        public void placeShipToRandomCell(int ownerID, Units.Unit obj)
+        {
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    Cell cell = grid[i, j];
+                    if (cell.GetOwnerID() == ownerID && cell.GetValue() == '0')
+                    {
+                        grid[i, j].SetValue(obj);
+                        return;
+                    }
+                }
+            }
+        }
         public Cell GetCell(int x, int y)
         {
             return grid[x, y];
@@ -104,25 +118,32 @@ namespace Server
 
     class Cell
     {
-        private char value;
+        private Units.Unit obj;
+        //private char value;
         private int ownerID;
         private int hits; // amount of times this cell was hit
 
         public Cell(int ownerID)
         {
             this.hits = 0;
-            this.value = '0';
             this.ownerID = ownerID;
         }
 
         public char GetValue()
         {
-            return this.value;
+            if (this.obj == null)
+            {
+                return '0';
+            }
+            return this.obj.GetUnitTypeSymbol();
         }
-
-        public void SetValue(char newValue)
+        public Units.Unit getObj()
         {
-            this.value = newValue;
+            return this.obj;
+        }
+        public void SetValue(Units.Unit newValue)
+        {
+            this.obj = newValue;
         }
 
         public int GetHits()

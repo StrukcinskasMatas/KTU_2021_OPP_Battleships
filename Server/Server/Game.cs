@@ -43,14 +43,32 @@ namespace Server
                 // Define players
                 Player activePlayer = players[activePlayerID];
                 Player waitingPlayer = players[1 - activePlayerID];
-
+                Boolean attackMove = false;
                 // Inform waiting player
                 waitingPlayer.SendMessage("Waiting for other player's turn...");
 
                 // Get command from active player
                 activePlayer.SendMessage("(cls)");
                 activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID));
-                activePlayer.SendMessage("(action needed) Attack enemy's territory: (example input: \"1 2\")");
+                activePlayer.SendMessage("(action needed) Select action (A)ttack, (C)opy");
+                //activePlayer.SendMessage("(action needed) Attack enemy's territory: (example input: \"1 2\")");
+                string type = activePlayer.ReceiveMessage()[0].ToString(); //TODO: this is a hack, need to fix message sending
+                switch (type)
+                {
+                    case "A":
+                        activePlayer.SendMessage("(action needed) Attack enemy's territory: (example input: \"1 2\")");
+                        //shipUnit = unitFactory.CreateTank();
+                        attackMove = true;
+                        break;
+                    case "C":
+                        activePlayer.SendMessage("(action needed) Select ship to copy: (example input: \"1 2\")");
+                        //shipUnit = unitFactory.CreateUtility();
+                        break;
+                    default:
+                        //player.SendMessage("(action needed) Invalid input.");
+                        continue;
+                }
+
 
                 while (true)
                 {
@@ -59,17 +77,27 @@ namespace Server
                     // TODO: validate input based on the grid (if not out of bounds, if the sub-grid belongs to the player)
                     if (coords.Count == 2)
                     {
-                        Console.WriteLine("Player " + activePlayerID.ToString() + " attacked: " + coords[0].ToString() + ", " + coords[1].ToString());
                         Cell cell = grid.GetCell(coords[0], coords[1]);
-                        if (cell.GetOwnerID() == activePlayerID)
+                        if (attackMove)
                         {
-                            activePlayer.SendMessage("(action needed) You cannot attack your own territory.");
-                            continue;
-                        }
+                            Console.WriteLine("Player " + activePlayerID.ToString() + " attacked: " + coords[0].ToString() + ", " + coords[1].ToString());
+                            if (cell.GetOwnerID() == activePlayerID)
+                            {
+                                activePlayer.SendMessage("(action needed) You cannot attack your own territory.");
+                                continue;
+                            }
 
-                        cell.AddHit();
-                        activePlayer.SendMessage("(cls)");
-                        activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID));
+                            cell.AddHit();
+                            activePlayer.SendMessage("(cls)");
+                            activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID));
+                        } else
+                        {
+                            Units.Unit shipUnit = cell.getObj();
+                            Units.Unit newShip = (Units.Unit)shipUnit.Clone();
+                            grid.placeShipToRandomCell(activePlayerID, newShip);
+                            activePlayer.SendMessage("(cls)");
+                            activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID));
+                        }
                     }
                     else
                     {
@@ -77,7 +105,7 @@ namespace Server
                         continue;
                     }
 
-                    // Get out of the while loop after successful attack (replace with a bool?)
+                    //// Get out of the while loop after successful attack (replace with a bool?)
                     break;
                 }
 
@@ -112,7 +140,7 @@ namespace Server
             player.SendMessage(this.grid.PrintGrid(playerID));
 
             Units.Creator creator = new Units.BattleshipCreator();
-            int[] shipSizes = new int[] { 1, 1, 1, 2, 2, 2 };
+            int[] shipSizes = new int[] { 1 };
 
             foreach (var shipSize in shipSizes)
             {
@@ -166,7 +194,7 @@ namespace Server
                     for (int i = 0; i < shipUnit.GetLenght(); i++)
                     {
                         Cell cellToChange = grid.GetCell(coords[0], coords[1] + i);
-                        cellToChange.SetValue(shipUnit.GetUnitTypeSymbol());
+                        cellToChange.SetValue(shipUnit);
                     }
 
                     player.SendMessage("(cls)");
