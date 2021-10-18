@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using Server.StrategyObserverBuilder;
 
 namespace Server
 {
@@ -69,6 +70,7 @@ namespace Server
                         continue;
                 }
 
+                // Kazkodel idomiai padaro tuos addHits
 
                 while (true)
                 {
@@ -78,21 +80,59 @@ namespace Server
                     if (coords.Count == 2)
                     {
                         Cell cell = grid.GetCell(coords[0], coords[1]);
+
                         if (attackMove)
                         {
-                            Console.WriteLine("Player " + activePlayerID.ToString() + " attacked: " + coords[0].ToString() + ", " + coords[1].ToString());
-                            if (cell.GetOwnerID() == activePlayerID)
-                            {
-                                activePlayer.SendMessage("(action needed) You cannot attack your own territory.");
-                                continue;
-                            }
+                            activePlayer.SendMessage("(action needed) Choose rocket explosion type (small, medium, big): ");
 
-                            cell.AddHit();
-                            activePlayer.SendMessage("(cls)");
-                            activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID));
+                            Explosions? explosionType = CovertResponseToExplotionType(activePlayer.ReceiveMessage(), activePlayer);
+                            Console.WriteLine(explosionType);
+
+                            if (explosionType != null) {
+                                
+                                List<Coordinates> coodinatesListWithExplosionEffect = new List<Coordinates>();
+
+                                if (explosionType == Explosions.Small)
+                                {
+                                    RocketStrategyInterface smallExplosion = new SmallExplosion();
+                                    Rocket rocket = new Rocket(strategy: smallExplosion);
+                                    coodinatesListWithExplosionEffect = rocket.explotionDamageArea(coords[0], coords[1]);
+                                }
+                                else if (explosionType == Explosions.Medium)
+                                {
+                                    RocketStrategyInterface mediumExplosion = new MediumExplosion();
+                                    Rocket rocket = new Rocket(strategy: mediumExplosion);
+                                    coodinatesListWithExplosionEffect = rocket.explotionDamageArea(coords[0], coords[1]);
+                                }
+                                else if (explosionType == Explosions.Big)
+                                {
+                                    RocketStrategyInterface bigExplosion = new BigExplosion();
+                                    Rocket rocket = new Rocket(strategy: bigExplosion);
+                                    coodinatesListWithExplosionEffect = rocket.explotionDamageArea(coords[0], coords[1]);
+                                }
+
+                                Console.WriteLine("Player " + activePlayerID.ToString() + " attacked: " + coords[0].ToString() + ", " + coords[1].ToString());
+                                if (cell.GetOwnerID() == activePlayerID)
+                                {
+                                    activePlayer.SendMessage("(action needed) You cannot attack your own territory.");
+                                    continue;
+                                }
+
+                                foreach (Coordinates coordinates in coodinatesListWithExplosionEffect)
+                                {
+                                    cell = grid.GetCell(coordinates.GetCoordinates().Item1, coordinates.GetCoordinates().Item2);
+                                    Console.WriteLine(grid.GetCell(coordinates.GetCoordinates().Item1, coordinates.GetCoordinates().Item2));
+
+                                    cell.AddHit();
+                                }
+
+                                activePlayer.SendMessage("(cls)");
+                                activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID));
+                            }
                         } else
                         {
                             Units.Unit shipUnit = cell.getObj();
+                            // FIXME: TO DO - Implement case when user enters random coordinates and not the ship coordinates
                             Units.Unit newShip = (Units.Unit)shipUnit.Clone();
                             grid.placeShipToRandomCell(activePlayerID, newShip);
                             activePlayer.SendMessage("(cls)");
@@ -220,6 +260,30 @@ namespace Server
                 .Select(int.Parse)
                 .Select(x => x - 1)
                 .ToList();
+        }
+
+        private Explosions CovertResponseToExplotionType(string response, Player player) {
+
+            Console.WriteLine(response);
+
+            if (response.ToLower().Trim()[0] == 's')
+            {
+                return Explosions.Small;
+            }
+            else if (response.ToLower().Trim()[0] == 'm')
+            {
+                return Explosions.Medium;
+            }
+            else if (response.ToLower().Trim()[0] == 'b')
+            {
+                return Explosions.Big;
+            }
+            else 
+            {
+                Console.WriteLine("HEREEEEEEE!!!!!!!");
+                player.SendMessage("Please choose an existing explosion type: small, medium, big");
+                return default;
+            }
         }
     }
 }
