@@ -40,5 +40,33 @@ namespace Server.Units
         {
             return (Tank)this.MemberwiseClone();
         }
+
+        private string body;
+        private string weapon;
+
+        public string getBody()
+        {
+            return body;
+        }
+        public void setBody(string body)
+        {
+            this.body = body;
+        }
+
+        public string getWeapon()
+        {
+            return weapon;
+        }
+        public void setWeapon(string weapon)
+        {
+            this.weapon = weapon;
+        }
+
+        public override string getConfiguration()
+        {
+            String config = GetUnitType() + " config: parts " + this.body + "| weapons " + this.weapon;
+            Console.WriteLine(config);
+            return config;
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace Server.Units
     {
         public override Tank CreateTank()
         {
+
             return new Tank(2, 1);
         }
 

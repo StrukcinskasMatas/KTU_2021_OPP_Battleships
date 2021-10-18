@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.StrategyObserverBuilder;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,17 @@ namespace Server.Units
     {
         public override Tank CreateTank()
         {
-            return new Tank(1, 1);
+            Tank tankUnit = new Tank(1, 1);
+            Builder builder = new TankBuilder();
+            return builder.startNewTank(tankUnit).addParts().addWepons().getBuildableTank();
+            //return new Tank(1, 1);
         }
 
         public override Utility CreateUtility()
         {
-            return new Utility(1, 1);
+            Utility utilityUnit = new Utility(1, 1);
+            Builder builder = new UtilityBuilder();
+            return builder.startNewUtility(utilityUnit).addParts().addWepons().getBuildableUtility();
         }
     }
 }

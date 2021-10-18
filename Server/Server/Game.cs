@@ -70,8 +70,6 @@ namespace Server
                         continue;
                 }
 
-                // Kazkodel idomiai padaro tuos addHits
-
                 while (true)
                 {
                     List<int> coords = ConvertResponseToCoordsList(activePlayer.ReceiveMessage());
@@ -197,9 +195,11 @@ namespace Server
                     {
                         case "T":
                             shipUnit = unitFactory.CreateTank();
+                            shipUnit.getConfiguration();
                             break;
                         case "U":
                             shipUnit = unitFactory.CreateUtility();
+                            shipUnit.getConfiguration();
                             break;
                         default:
                             player.SendMessage("(action needed) Invalid input.");
