@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 
 namespace Client
 {
@@ -45,25 +47,22 @@ namespace Client
         {
             while (serverSocket.Connected)
             {
-                // Receive a message from the server
-                byte[] messageBuffer = new byte[1024];
-                serverSocket.Receive(messageBuffer);
-                string message = Encoding.UTF8.GetString(messageBuffer);
-
-                if (message.Contains("cls"))
+                Message response = new Message();
+                Message message = new Message();
+                response.recieve(serverSocket);
+                if (response.clear_console)
                 {
                     Console.Clear();
                 }
-
-                Console.WriteLine(message); // TODO: make nice message struct
+                Console.WriteLine(response.message);
 
                 // Process the server's message
-                if (message.Contains("action needed"))
+                if (response.action_needed)
                 {
                     Console.Write("> ");
                     string command = Console.ReadLine();
-                    byte[] commandBuffer = Encoding.UTF8.GetBytes(command);
-                    serverSocket.Send(commandBuffer); // need try-catch, perhaps move to another 'SendCommand()' function
+                    message.setMessage(command);
+                    message.send(serverSocket);
                 }
             }
         }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-
 namespace Server
 {
     class Program
@@ -27,6 +28,7 @@ namespace Server
             Console.WriteLine("Server started... to close it, press any key...");
 
             while (players.Count != 2) { }
+            while (players.Count != 2) { }
 
             Console.WriteLine("Two players connected! Starting the game...");
             Game gameInstance = Game.getInstance(players);
@@ -39,21 +41,21 @@ namespace Server
             // Receive incoming connection
             Socket clientSocket = serverSocket.EndAccept(AR);
             Console.WriteLine("Received a connection!");
+            Message message = new Message();
+            Message response = new Message();
+            message.setMessage("Please enter your username:");
+            message.actionNeeded(true);
+            message.send(clientSocket);
+            //// Get username
+            response.recieve(clientSocket);
+            Console.WriteLine("Connection identified: " + response.message);
 
-            // Ask for username
-            clientSocket.Send(Encoding.ASCII.GetBytes("(action needed) Please enter your username:"));
-
-            // Get username
-            byte[] responseBuffer = new byte[1024];
-            clientSocket.Receive(responseBuffer);
-            string username = Encoding.ASCII.GetString(responseBuffer);
-            Console.WriteLine("Connection identified: " + username);
-
-            // Add the connection to players list
-            players.Add(new Player(username, clientSocket));
+            //// Add the connection to players list
+            players.Add(new Player(response.message, clientSocket));
             if (players.Count != 2)
             {
-                clientSocket.Send(Encoding.ASCII.GetBytes("Waiting for the second player to join..."));
+                message.setMessage("Waiting for the second player to join...");
+                message.send(clientSocket);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Net.Sockets;
 using System.Text;
 
@@ -25,16 +26,24 @@ namespace Server
             return this.socket;
         }
 
-        public void SendMessage(string message)
+        public void SendMessage(string msg, bool clear, bool action)
         {
-            this.socket.Send(Encoding.UTF8.GetBytes(message));
+            Message message = new Message();
+            message.setMessage(msg);
+            message.actionNeeded(action);
+            message.clearConsole(clear);
+            string jsonData = JsonConvert.SerializeObject(message);
+            byte[] dataBytes = Encoding.Default.GetBytes(jsonData);
+            this.socket.Send(dataBytes);
         }
 
         public string ReceiveMessage()
         {
-            byte[] responseBuffer = new byte[1024];
-            this.socket.Receive(responseBuffer);
-            return Encoding.UTF8.GetString(responseBuffer);
+            byte[] buffer = new byte[1024 * 4];
+            this.socket.Receive(buffer);
+            string readData = Encoding.Default.GetString(buffer);
+            Message response = JsonConvert.DeserializeObject<Message>(readData);
+            return response.message;
         }
     }
 }
