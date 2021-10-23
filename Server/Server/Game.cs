@@ -5,6 +5,8 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using Server.StrategyObserverBuilder;
+using Server.Units;
+using Server.Decorator;
 
 namespace Server
 {
@@ -183,7 +185,6 @@ namespace Server
                 player.SendMessage("Choose your ship type: (T)ank or (U)tility:", false, true);
 
                 Units.Unit shipUnit;
-
                 while (true)
                 {
                     string type = player.ReceiveMessage()[0].ToString(); //TODO: this is a hack, need to fix message sending
@@ -204,7 +205,11 @@ namespace Server
 
                     break;
                 }
-
+                Units.Unit decoratedUnit = new BlueColorDecorator(shipUnit);
+                Units.Unit reddecoratedUnit = new RedColorDecorator(decoratedUnit);
+                Units.Unit greendecoratedUnit = new GreenColorDecorator(reddecoratedUnit);
+                Console.WriteLine(greendecoratedUnit.Operation());
+                
                 // TODO: validate input if not out of bounds
                 // TODO: validate if ship already placed
                 player.SendMessage(String.Format("Place your {0} {1} ship: (example coords input: \"1 2\")", shipUnit.GetUnitType(), shipUnit.GetSizeString()), false, true);

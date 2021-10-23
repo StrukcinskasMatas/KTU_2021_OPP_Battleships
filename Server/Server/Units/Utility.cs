@@ -68,5 +68,9 @@ namespace Server.Units
             Console.WriteLine(config);
             return config;
         }
+        public override string Operation()
+        {
+            return "ConcreteComponent";
+        }
     }
 }

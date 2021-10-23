@@ -14,5 +14,6 @@ namespace Server.Units
         public abstract int GetLenght();
         public abstract object Clone();
         public abstract string getConfiguration();
+        public abstract string Operation();
     }
 }
