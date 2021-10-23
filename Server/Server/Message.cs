@@ -6,20 +6,21 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server
+namespace Client
 {
     public class Message
     {
         public string message;
         public bool action_needed;
         public bool clear_console;
-        
+
         public Message GetMessage()
         {
             Message msg = new Message
             {
                 message = this.message,
-                action_needed = this.action_needed
+                action_needed = this.action_needed,
+                clear_console = this.clear_console
             };
             return msg;
         }
@@ -27,13 +28,13 @@ namespace Server
         {
             this.message = message;
         }
-        public void actionNeeded(bool action)
+        public void actionNeeded()
         {
-            this.action_needed = action;
+            this.action_needed = true;
         }
-        public void clearConsole(bool clear)
+        public void clearConsole()
         {
-            this.clear_console = clear;
+            this.clear_console = true;
         }
         public void reset()
         {
@@ -49,7 +50,7 @@ namespace Server
             socket.Send(dataBytes);
             reset();
         }
-        public void recieve (Socket socket)
+        public void recieve(Socket socket)
         {
             byte[] buffer = new byte[1024 * 4];
             socket.Receive(buffer);
@@ -57,6 +58,7 @@ namespace Server
             Message response = JsonConvert.DeserializeObject<Message>(readData);
             this.message = response.message;
             this.action_needed = response.action_needed;
+            this.clear_console = response.clear_console;
         }
     }
 }
