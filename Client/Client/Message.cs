@@ -19,8 +19,7 @@ namespace Client
             Message msg = new Message
             {
                 message = this.message,
-                action_needed = this.action_needed,
-                clear_console = this.clear_console
+                action_needed = this.action_needed
             };
             return msg;
         }
@@ -58,7 +57,6 @@ namespace Client
             Message response = JsonConvert.DeserializeObject<Message>(readData);
             this.message = response.message;
             this.action_needed = response.action_needed;
-            this.clear_console = response.clear_console;
         }
     }
 }

@@ -13,14 +13,13 @@ namespace Server
         public string message;
         public bool action_needed;
         public bool clear_console;
-
+        
         public Message GetMessage()
         {
             Message msg = new Message
             {
                 message = this.message,
-                action_needed = this.action_needed,
-                clear_console = this.clear_console
+                action_needed = this.action_needed
             };
             return msg;
         }
@@ -28,13 +27,13 @@ namespace Server
         {
             this.message = message;
         }
-        public void actionNeeded()
+        public void actionNeeded(bool action)
         {
-            this.action_needed = true;
+            this.action_needed = action;
         }
-        public void clearConsole()
+        public void clearConsole(bool clear)
         {
-            this.clear_console = true;
+            this.clear_console = clear;
         }
         public void reset()
         {
@@ -50,7 +49,7 @@ namespace Server
             socket.Send(dataBytes);
             reset();
         }
-        public void recieve(Socket socket)
+        public void recieve (Socket socket)
         {
             byte[] buffer = new byte[1024 * 4];
             socket.Receive(buffer);
@@ -58,7 +57,6 @@ namespace Server
             Message response = JsonConvert.DeserializeObject<Message>(readData);
             this.message = response.message;
             this.action_needed = response.action_needed;
-            this.clear_console = response.clear_console;
         }
     }
 }
