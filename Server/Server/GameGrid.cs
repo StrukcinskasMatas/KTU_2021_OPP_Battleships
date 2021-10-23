@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.StrategyObserverBuilder;
+using Server.Units;
 
 namespace Server
 {
-    class Grid
+    public class Grid: ISubject
     {
         private int size;
         private Cell[,] grid;
+        private List<IObserver> observers = new List<IObserver>();
+        private object _lock = new object();
 
         public Grid(int size)
         {
@@ -34,6 +38,7 @@ namespace Server
                     if (cell.GetOwnerID() == ownerID && cell.GetValue() == '0')
                     {
                         grid[i, j].SetValue(obj);
+                        Notify();
                         return;
                     }
                 }
@@ -114,9 +119,43 @@ namespace Server
 
             return -1;
         }
+
+        /// <summary>
+        /// Observer pattern
+        /// </summary>
+        /// <param name="observer">List of added observers</param>
+        public void Attach(IObserver observer)
+        {
+            Console.WriteLine("Subject: Attached an observer.");
+            observers.Add(observer);
+        }
+
+        public void Detach(IObserver observer)
+        {
+            Console.WriteLine("Subject: Detached an observer.");
+            observers.Remove(observer);
+        }
+
+        public void Notify()
+        {
+            try
+            {
+                lock (_lock)
+                {
+                    foreach (var observer in observers)
+                    {
+                        observer.Update(grid);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception occured - " + ex.Message);
+            }
+        }
     }
 
-    class Cell
+    public class Cell
     {
         private Units.Unit obj;
         //private char value;

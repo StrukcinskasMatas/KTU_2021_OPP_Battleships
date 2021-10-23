@@ -47,3 +47,6 @@ C:\Users\Rokas\Desktop\Univeras sucks\7 Semestras\OPP\KTU_2021_OPP_Battleships\C
 C:\Users\Rokas\Desktop\Univeras sucks\7 Semestras\OPP\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.genruntimeconfig.cache
 C:\Users\Rokas\Desktop\Univeras sucks\7 Semestras\OPP\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\Rokas\Desktop\Univeras sucks\7 Semestras\OPP\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.csproj.CopyComplete
+C:\Users\Karolis\Desktop\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Karolis\Desktop\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.csproj.AssemblyReference.cache
+C:\Users\Karolis\Desktop\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.csproj.CopyComplete

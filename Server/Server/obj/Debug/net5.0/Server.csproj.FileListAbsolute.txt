@@ -48,3 +48,4 @@ C:\Users\Rokas\Desktop\Univeras sucks\7 Semestras\OPP\KTU_2021_OPP_Battleships\S
 C:\Users\Rokas\Desktop\Univeras sucks\7 Semestras\OPP\KTU_2021_OPP_Battleships\Server\Server\obj\Debug\net5.0\Server.genruntimeconfig.cache
 C:\Users\Rokas\Desktop\Univeras sucks\7 Semestras\OPP\KTU_2021_OPP_Battleships\Server\Server\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\Rokas\Desktop\Univeras sucks\7 Semestras\OPP\KTU_2021_OPP_Battleships\Server\Server\obj\Debug\net5.0\Server.csproj.CopyComplete
+C:\Users\Karolis\Desktop\KTU_2021_OPP_Battleships\Server\Server\bin\Debug\net5.0\Newtonsoft.Json.dll

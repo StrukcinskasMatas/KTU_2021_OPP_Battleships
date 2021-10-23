@@ -14,15 +14,15 @@ namespace Server
     {
         // Singleton instance
         private static Game instance = null;
+        private Grid grid;
+        private List<Player> players;
+
         private Game(List<Player> players)
         {
             Console.WriteLine("Game singleton initialized.");
             this.players = players;
             this.grid = new Grid(10);
         }
-
-        private Grid grid;
-        private List<Player> players;
 
         public static Game getInstance(List<Player> players)
         {
@@ -38,6 +38,7 @@ namespace Server
         {
             SendGlobalMessage("Game is starting!", true, false);
             SetupShips();
+            Subscribe();
 
             int activePlayerID = 0;
             int winnerID = grid.GetWinnerID();
@@ -159,6 +160,12 @@ namespace Server
             Console.WriteLine("Game ended!");
         }
 
+        private void Subscribe()
+        {
+            grid.Attach(players[0]);
+            grid.Attach(players[1]);
+        }
+
         private void SetupShips()
         {
             // Player one setup ships
@@ -193,10 +200,12 @@ namespace Server
                         case "T":
                             shipUnit = unitFactory.CreateTank();
                             shipUnit.getConfiguration();
+                            //grid.Attach(shipUnit);
                             break;
                         case "U":
                             shipUnit = unitFactory.CreateUtility();
                             shipUnit.getConfiguration();
+                            //grid.Attach(shipUnit);
                             break;
                         default:
                             player.SendMessage("Invalid input.", false, true);
