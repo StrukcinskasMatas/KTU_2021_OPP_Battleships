@@ -11,14 +11,12 @@ namespace Server.Units
         private int xLenght;
         private int yLenght;
         public Shield Shield;
-
         public Utility(int x, int y, Shield shield)
         {
             xLenght = x;
             yLenght = y;
             this.Shield = shield;
         }
-
         public override string GetSizeString()
         {
             return String.Format("{0}x{1}", xLenght, yLenght);
@@ -36,18 +34,20 @@ namespace Server.Units
 
         public override char GetUnitTypeSymbol()
         {
-            return 'U';
+            if (this.Shield.type == "Metal")
+            {
+                return 'U';
+            }
+            else
+            {
+                return 'Q';
+            }
         }
         public override Utility Clone()
         {
             return (Utility)this.MemberwiseClone();
         }
-        public override Utility DeepClone()
-        {
-            Utility clone = (Utility)this.MemberwiseClone();
-            clone.Shield = new Shield(Shield.type);
-            return clone;
-        }
+
         private string body;
         private string weapon;
 
@@ -77,12 +77,19 @@ namespace Server.Units
         }
         public override string Operation()
         {
-            return "ConcreteComponent";
+            return "hitted utility";
         }
 
-        public override string GetUnitInfo()
+        public override object DeepClone()
         {
-          return "Utility with : " + this.Shield.type;
+            Utility clone = (Utility)this.MemberwiseClone();
+            clone.Shield = new Shield(Shield.type);
+            return clone;
+        }
+
+        public override void ChangeShield(string type)
+        {
+            this.Shield.ChangeType(type);
         }
     }
 }

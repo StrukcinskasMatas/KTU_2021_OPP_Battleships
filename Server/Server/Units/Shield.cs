@@ -8,5 +8,9 @@
         {
             this.type = type;
         }
+        public void ChangeType (string type)
+        {
+            this.type = type;
+        }
     }
 }

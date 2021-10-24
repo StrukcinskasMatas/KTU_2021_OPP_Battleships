@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "M0gic6GWSpJwLGDNVc5CC6ThuH29CJvJoc7SLfWJ/n4MejdG4bHcl4nzo2t5/TxtdBHbItGTUVxstvdkdPl06A==",
+  "dgSpecHash": "HLMaVB/7VFidMM2H3WwY1wzWDm9Gr4O4BKREqMRfTzPYgRakcjiJfdpKkRa2ONaL4JR1r2HPAxewjDLOej2WoQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Rokas\\Desktop\\Univeras sucks\\7 Semestras\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj",
+  "projectFilePath": "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Rokas\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],

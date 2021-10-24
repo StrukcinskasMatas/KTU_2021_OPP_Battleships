@@ -11,6 +11,7 @@ namespace Server.Units
         public override Tank CreateTank()
         {
             Shield shield = new Shield("Titan");
+
             return new Tank(2, 1, shield);
         }
 

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rokas\\Desktop\\Univeras sucks\\7 Semestras\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj": {}
+    "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rokas\\Desktop\\Univeras sucks\\7 Semestras\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj": {
+    "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rokas\\Desktop\\Univeras sucks\\7 Semestras\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj",
+        "projectUniqueName": "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj",
         "projectName": "Client",
-        "projectPath": "C:\\Users\\Rokas\\Desktop\\Univeras sucks\\7 Semestras\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj",
+        "projectPath": "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj",
         "packagesPath": "C:\\Users\\Rokas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rokas\\Desktop\\Univeras sucks\\7 Semestras\\KTU_2021_OPP_Battleships\\Client\\Client\\obj\\",
+        "outputPath": "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Client\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Rokas\\AppData\\Roaming\\NuGet\\NuGet.Config",

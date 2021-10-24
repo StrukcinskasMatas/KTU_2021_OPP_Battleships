@@ -14,15 +14,15 @@ namespace Server
     {
         // Singleton instance
         private static Game instance = null;
-        private Grid grid;
-        private List<Player> players;
-
         private Game(List<Player> players)
         {
             Console.WriteLine("Game singleton initialized.");
             this.players = players;
             this.grid = new Grid(10);
         }
+
+        private Grid grid;
+        private List<Player> players;
 
         public static Game getInstance(List<Player> players)
         {
@@ -38,7 +38,6 @@ namespace Server
         {
             SendGlobalMessage("Game is starting!", true, false);
             SetupShips();
-            Subscribe();
 
             int activePlayerID = 0;
             int winnerID = grid.GetWinnerID();
@@ -50,11 +49,12 @@ namespace Server
                 Player activePlayer = players[activePlayerID];
                 Player waitingPlayer = players[1 - activePlayerID];
                 Boolean attackMove = false;
+                Boolean copyMove = false;
                 // Inform waiting player
                 // Get command from active player
                 waitingPlayer.SendMessage("Waiting for other player's turn...", false, false);
                 activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID), true, false);
-                activePlayer.SendMessage("Select action (A)ttack, (C)opy", false, true);
+                activePlayer.SendMessage("Select action (A)ttack, (C)opy U(pgrade)", false, true);
 
                 //activePlayer.SendMessage("(action needed) Attack enemy's territory: (example input: \"1 2\")");
                 string type = activePlayer.ReceiveMessage()[0].ToString(); //TODO: this is a hack, need to fix message sending
@@ -67,6 +67,11 @@ namespace Server
                         break;
                     case "C":
                         activePlayer.SendMessage("Select ship to copy: (example input: \"1 2\")", false, true);
+                        //shipUnit = unitFactory.CreateUtility();
+                        copyMove = true;
+                        break;
+                    case "U":
+                        activePlayer.SendMessage("Select ship to upgrade: (example input: \"1 2\")", false, true);
                         //shipUnit = unitFactory.CreateUtility();
                         break;
                     default:
@@ -91,7 +96,7 @@ namespace Server
                             Console.WriteLine(explosionType);
 
                             if (explosionType != null) {
-                                
+
                                 List<Coordinates> coodinatesListWithExplosionEffect = new List<Coordinates>();
 
                                 if (explosionType == Explosions.Small)
@@ -126,16 +131,28 @@ namespace Server
                                     Console.WriteLine(grid.GetCell(coordinates.GetCoordinates().Item1, coordinates.GetCoordinates().Item2));
 
                                     cell.AddHit();
+                                    if (cell.getObj() != null)
+                                    {
+                                        Units.Unit shipUnit = cell.getObj();
+                                        Units.Unit fireDecoratedUnit = new FireDecorator(shipUnit);
+                                        Units.Unit waterDecoratedUnit = new WaterDecorator(fireDecoratedUnit);
+                                        Units.Unit lightingDecoratedUnit = new LightningDecorator(waterDecoratedUnit);
+                                        Console.WriteLine(lightingDecoratedUnit.Operation());
+                                    }
                                 }
                                 activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID), true, false);
                             }
-                        } else
+                        } else if (copyMove)
                         {
                             Units.Unit shipUnit = cell.getObj();
                             // FIXME: TO DO - Implement case when user enters random coordinates and not the ship coordinates
-                            Units.Unit newShip = (Units.Unit)shipUnit.Clone();
-                            //Console.WriteLine(newShip.GetUnitInfo());
+                            Units.Unit newShip = (Units.Unit)shipUnit.DeepClone();
                             grid.placeShipToRandomCell(activePlayerID, newShip);
+                            activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID), true, false);
+                        } else
+                        {
+                            Units.Unit shipUnit = cell.getObj();
+                            shipUnit.ChangeShield("Platinum");
                             activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID), true, false);
                         }
                     }
@@ -159,12 +176,6 @@ namespace Server
             players[1 - winnerID].SendMessage("You've lost the game!", false, false);
 
             Console.WriteLine("Game ended!");
-        }
-
-        private void Subscribe()
-        {
-            grid.Attach(players[0]);
-            grid.Attach(players[1]);
         }
 
         private void SetupShips()
@@ -201,12 +212,10 @@ namespace Server
                         case "T":
                             shipUnit = unitFactory.CreateTank();
                             shipUnit.getConfiguration();
-                            //grid.Attach(shipUnit);
                             break;
                         case "U":
                             shipUnit = unitFactory.CreateUtility();
                             shipUnit.getConfiguration();
-                            //grid.Attach(shipUnit);
                             break;
                         default:
                             player.SendMessage("Invalid input.", false, true);
@@ -215,11 +224,6 @@ namespace Server
 
                     break;
                 }
-                Units.Unit decoratedUnit = new BlueColorDecorator(shipUnit);
-                Units.Unit reddecoratedUnit = new RedColorDecorator(decoratedUnit);
-                Units.Unit greendecoratedUnit = new GreenColorDecorator(reddecoratedUnit);
-                Console.WriteLine(greendecoratedUnit.Operation());
-                
                 // TODO: validate input if not out of bounds
                 // TODO: validate if ship already placed
                 player.SendMessage(String.Format("Place your {0} {1} ship: (example coords input: \"1 2\")", shipUnit.GetUnitType(), shipUnit.GetSizeString()), false, true);
