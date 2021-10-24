@@ -11,7 +11,8 @@ namespace Server.Units
     {
         public override Tank CreateTank()
         {
-            Tank tankUnit = new Tank(1, 1);
+            Shield shield = new Shield("Titan");
+            Tank tankUnit = new Tank(1, 1, shield);
             Builder builder = new TankBuilder();
             return builder.startNewTank(tankUnit).addParts().addWepons().getBuildableTank();
             //return new Tank(1, 1);
@@ -19,7 +20,8 @@ namespace Server.Units
 
         public override Utility CreateUtility()
         {
-            Utility utilityUnit = new Utility(1, 1);
+            Shield shield = new Shield("Metal");
+            Utility utilityUnit = new Utility(1, 1, shield);
             Builder builder = new UtilityBuilder();
             return builder.startNewUtility(utilityUnit).addParts().addWepons().getBuildableUtility();
         }

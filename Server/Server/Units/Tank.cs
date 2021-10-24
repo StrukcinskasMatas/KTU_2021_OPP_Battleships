@@ -10,11 +10,13 @@ namespace Server.Units
     {
         private int xLenght;
         private int yLenght;
+        public Shield Shield;
 
-        public Tank(int x, int y)
+        public Tank(int x, int y, Shield shield)
         {
             xLenght = x;
             yLenght = y;
+            this.Shield = shield;
         }
        
         public override string GetSizeString()
@@ -40,6 +42,12 @@ namespace Server.Units
         {
             return (Tank)this.MemberwiseClone();
         }
+        public override Tank DeepClone()
+        {
+            Tank clone = (Tank)this.MemberwiseClone();
+            clone.Shield = new Shield(Shield.type);
+            return clone;
+        }
 
         private string body;
         private string weapon;
@@ -61,7 +69,10 @@ namespace Server.Units
         {
             this.weapon = weapon;
         }
-
+        public override string GetUnitInfo()
+        {
+            return "Tank with : " + this.Shield.type;
+        }
         public override string getConfiguration()
         {
             String config = GetUnitType() + " config: parts " + this.body + "| weapons " + this.weapon;
@@ -72,5 +83,6 @@ namespace Server.Units
         {
             return "ConcreteComponent";
         }
+
     }
 }

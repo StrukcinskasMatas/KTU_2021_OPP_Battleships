@@ -134,6 +134,7 @@ namespace Server
                             Units.Unit shipUnit = cell.getObj();
                             // FIXME: TO DO - Implement case when user enters random coordinates and not the ship coordinates
                             Units.Unit newShip = (Units.Unit)shipUnit.Clone();
+                            //Console.WriteLine(newShip.GetUnitInfo());
                             grid.placeShipToRandomCell(activePlayerID, newShip);
                             activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID), true, false);
                         }

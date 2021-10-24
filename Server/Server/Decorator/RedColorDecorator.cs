@@ -18,6 +18,11 @@ namespace Server.Decorator
             throw new NotImplementedException();
         }
 
+        public override object DeepClone()
+        {
+            throw new NotImplementedException();
+        }
+
         public override string getConfiguration()
         {
             throw new NotImplementedException();
@@ -29,6 +34,11 @@ namespace Server.Decorator
         }
 
         public override string GetSizeString()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetUnitInfo()
         {
             throw new NotImplementedException();
         }

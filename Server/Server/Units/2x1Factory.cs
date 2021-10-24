@@ -10,13 +10,14 @@ namespace Server.Units
     {
         public override Tank CreateTank()
         {
-
-            return new Tank(2, 1);
+            Shield shield = new Shield("Titan");
+            return new Tank(2, 1, shield);
         }
 
         public override Utility CreateUtility()
         {
-            return new Utility(2, 1);
+            Shield shield = new Shield("Metal");
+            return new Utility(2, 1, shield);
         }
     }
 }
