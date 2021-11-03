@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using Server.StrategyObserverBuilder;
 using Server.Units;
 using Server.Decorator;
+using Server.Adapter;
 
 namespace Server
 {
@@ -137,7 +138,7 @@ namespace Server
                                         Units.Unit fireDecoratedUnit = new FireDecorator(shipUnit);
                                         Units.Unit waterDecoratedUnit = new WaterDecorator(fireDecoratedUnit);
                                         Units.Unit lightingDecoratedUnit = new LightningDecorator(waterDecoratedUnit);
-                                        Console.WriteLine(lightingDecoratedUnit.Operation());
+                                        Console.WriteLine(lightingDecoratedUnit.Operation() + " " + shipUnit.ShowStatus(new AdapterDead(new StatusDead())));
                                     }
                                 }
                                 activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID), true, false);
@@ -236,9 +237,9 @@ namespace Server
                         continue;
                     }
 
-                    Console.WriteLine(String.Format("Player {0} placed {1}{2} ship at: {3}, {4}", 
-                        playerID.ToString(), shipUnit.GetUnitType(), shipUnit.GetSizeString(), coords[0].ToString(), coords[1].ToString()));
-
+                    Console.WriteLine(String.Format("Player {0} placed {1}{2} ship at: {3}, {4}, {5}", 
+                        playerID.ToString(), shipUnit.GetUnitType(), shipUnit.GetSizeString(), coords[0].ToString(), coords[1].ToString(), shipUnit.ShowStatus(new StatusAlive())));
+                    
                     Cell cell = grid.GetCell(coords[0], coords[1]);
                     if (cell.GetOwnerID() != playerID)
                     {

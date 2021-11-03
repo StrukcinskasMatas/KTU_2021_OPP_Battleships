@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Adapter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Server.Units
 {
     public abstract class Unit: ICloneable
     {
+        StatusAlive status;
         public abstract string GetUnitType();
         public abstract char GetUnitTypeSymbol();
         public abstract string GetSizeString();
@@ -17,5 +19,10 @@ namespace Server.Units
         public abstract string getConfiguration();
         public abstract string Operation();
         public abstract void ChangeShield(string type);
+        public string ShowStatus(StatusAlive status)
+        {
+            this.status = status;
+            return status.statusAlive();
+        }
     }
 }
