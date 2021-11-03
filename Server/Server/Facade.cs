@@ -10,11 +10,11 @@ using Server.Decorator;
 
 namespace Server
 {
-    class Game
+    class Facade
     {
         // Singleton instance
-        private static Game instance = null;
-        private Game(List<Player> players)
+        private static Facade instance = null;
+        private Facade(List<Player> players)
         {
             Console.WriteLine("Game singleton initialized.");
             this.players = players;
@@ -24,11 +24,11 @@ namespace Server
         private Grid grid;
         private List<Player> players;
 
-        public static Game getInstance(List<Player> players)
+        public static Facade getInstance(List<Player> players)
         {
             if (instance == null)
             {
-                instance = new Game(players);
+                instance = new Facade(players);
             }
 
             return instance;

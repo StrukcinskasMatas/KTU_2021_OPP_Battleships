@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj": {}
+    "C:\\Users\\margin\\OneDrive - Kaunas University of Technology\\KTU\\Ketvirtas kursas, pirmas semestras\\Objektinis programų projektavimas\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj": {
+    "C:\\Users\\margin\\OneDrive - Kaunas University of Technology\\KTU\\Ketvirtas kursas, pirmas semestras\\Objektinis programų projektavimas\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj",
+        "projectUniqueName": "C:\\Users\\margin\\OneDrive - Kaunas University of Technology\\KTU\\Ketvirtas kursas, pirmas semestras\\Objektinis programų projektavimas\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj",
         "projectName": "Client",
-        "projectPath": "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj",
-        "packagesPath": "C:\\Users\\Rokas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Client\\Client\\obj\\",
+        "projectPath": "C:\\Users\\margin\\OneDrive - Kaunas University of Technology\\KTU\\Ketvirtas kursas, pirmas semestras\\Objektinis programų projektavimas\\KTU_2021_OPP_Battleships\\Client\\Client\\Client.csproj",
+        "packagesPath": "C:\\Users\\margin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\margin\\OneDrive - Kaunas University of Technology\\KTU\\Ketvirtas kursas, pirmas semestras\\Objektinis programų projektavimas\\KTU_2021_OPP_Battleships\\Client\\Client\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Rokas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\margin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

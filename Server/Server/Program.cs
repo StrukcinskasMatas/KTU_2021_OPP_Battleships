@@ -31,7 +31,7 @@ namespace Server
             while (players.Count != 2) { }
 
             Console.WriteLine("Two players connected! Starting the game...");
-            Game gameInstance = Game.getInstance(players);
+            Facade gameInstance = Facade.getInstance(players);
             gameInstance.StartGame();
             Console.ReadLine();
         }

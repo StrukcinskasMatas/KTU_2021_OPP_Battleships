@@ -48,19 +48,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Rokas\\.nuget\\packages\\": {}
+    "C:\\Users\\margin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Server\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\margin\\OneDrive - Kaunas University of Technology\\KTU\\Ketvirtas kursas, pirmas semestras\\Objektinis programų projektavimas\\KTU_2021_OPP_Battleships\\Server\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Server\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\Rokas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rokas\\Desktop\\New folder (2)\\KTU_2021_OPP_Battleships\\Server\\Server\\obj\\",
+      "projectPath": "C:\\Users\\margin\\OneDrive - Kaunas University of Technology\\KTU\\Ketvirtas kursas, pirmas semestras\\Objektinis programų projektavimas\\KTU_2021_OPP_Battleships\\Server\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\margin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\margin\\OneDrive - Kaunas University of Technology\\KTU\\Ketvirtas kursas, pirmas semestras\\Objektinis programų projektavimas\\KTU_2021_OPP_Battleships\\Server\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Rokas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\margin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
