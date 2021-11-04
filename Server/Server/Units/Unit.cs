@@ -1,4 +1,5 @@
 ﻿using Server.Adapter;
+using Server.Bridge;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Server.Units
     public abstract class Unit: ICloneable
     {
         StatusAlive status;
+        public Perk perk;
         public abstract string GetUnitType();
         public abstract char GetUnitTypeSymbol();
         public abstract string GetSizeString();
@@ -23,6 +25,26 @@ namespace Server.Units
         {
             this.status = status;
             return status.statusAlive();
+        }
+        public string AddPerk()
+        {
+            Random rnd = new Random();
+            int num = rnd.Next(2);
+            Perk newPerk;
+            if(num == 0)
+            {
+                newPerk = new Fast();
+            }
+            else if(num == 1)
+            {
+                newPerk = new Slow();
+            }
+            else
+            {
+                newPerk = new Durable();
+            }
+            this.perk = newPerk;
+            return this.perk.skill();
         }
     }
 }

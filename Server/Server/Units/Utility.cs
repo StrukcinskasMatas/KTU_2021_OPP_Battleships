@@ -71,7 +71,7 @@ namespace Server.Units
 
         public override string getConfiguration()
         {
-            String config = GetUnitType() + " config: parts " + this.body + "| weapons " + this.weapon;
+            String config = GetUnitType() + " config: parts " + this.body + " | weapons " + this.weapon + " | Perks: " + this.AddPerk();
             Console.WriteLine(config);
             return config;
         }
