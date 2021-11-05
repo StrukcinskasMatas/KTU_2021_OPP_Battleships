@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Server.Command
 {
-    class ComplexCommand : ICommand
+    class MessageSender : ICommand
     {
         private Receiver _receiver;
 
@@ -19,7 +19,7 @@ namespace Server.Command
 
         // Complex commands can accept one or several receiver objects along
         // with any context data via the constructor.
-        public ComplexCommand(Receiver receiver, Socket socket, string message, bool clear, bool action)
+        public MessageSender(Receiver receiver, Socket socket, string message, bool clear, bool action)
         {
             this._receiver = receiver;
             this._message = message;

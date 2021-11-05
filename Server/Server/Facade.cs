@@ -55,8 +55,8 @@ namespace Server
                 // Define players
                 Player activePlayer = players[activePlayerID];
                 Player waitingPlayer = players[1 - activePlayerID];
-                invoker.SetOnStart(new ComplexCommand(receiver, activePlayer.GetSocket(), this.grid.PrintGrid(activePlayerID), true, false));
-                invoker.SetOnFinish(new ComplexCommand(receiver, activePlayer.GetSocket(), "Select action (A)ttack, (C)opy U(pgrade)", false, true));
+                invoker.SetOnStart(new MessageSender(receiver, activePlayer.GetSocket(), this.grid.PrintGrid(activePlayerID), true, false));
+                invoker.SetOnFinish(new MessageSender(receiver, activePlayer.GetSocket(), "Select action (A)ttack, (C)opy U(pgrade)", false, true));
                 Boolean attackMove = false;
                 Boolean copyMove = false;
                 // Inform waiting player
