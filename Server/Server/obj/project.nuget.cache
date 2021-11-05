@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "/CNCFPfeK6BkT4eDJt5ZmkunP3NhWG5CHjtUoYpJmiQt+Cz42uwqsqCTVy2qEypkOT+iygIkJdz/D6t7Uc4fQw==",
+  "dgSpecHash": "0t3DiufQy2ZXFK63/xdjj6yjKdqS6pVSTkarUNk7Jh25vyiLafUzMw5gQvfAaDMWsVE6aEevST6qqTYxYVgpIg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\margin\\OneDrive - Kaunas University of Technology\\KTU\\Ketvirtas kursas, pirmas semestras\\Objektinis programų projektavimas\\KTU_2021_OPP_Battleships\\Server\\Server\\Server.csproj",
+  "projectFilePath": "C:\\Users\\Rokas\\Desktop\\Univeras sucks\\7 Semestras\\OPP\\KTU_2021_OPP_Battleships\\Server\\Server\\Server.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\margin\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+    "C:\\Users\\Rokas\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],
   "logs": []
 }

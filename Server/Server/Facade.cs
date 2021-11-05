@@ -8,6 +8,7 @@ using Server.StrategyObserverBuilder;
 using Server.Units;
 using Server.Decorator;
 using Server.Adapter;
+using Server.Command;
 
 namespace Server
 {
@@ -38,6 +39,11 @@ namespace Server
         public void StartGame()
         {
             SendGlobalMessage("Game is starting!", true, false);
+            Invoker invoker = new Invoker();
+            //invoker.SetOnStart(new SimpleCommand("Say Hi!"));
+            Receiver receiver = new Receiver();
+
+
             SetupShips();
 
             int activePlayerID = 0;
@@ -49,14 +55,16 @@ namespace Server
                 // Define players
                 Player activePlayer = players[activePlayerID];
                 Player waitingPlayer = players[1 - activePlayerID];
+                invoker.SetOnStart(new ComplexCommand(receiver, activePlayer.GetSocket(), this.grid.PrintGrid(activePlayerID), true, false));
+                invoker.SetOnFinish(new ComplexCommand(receiver, activePlayer.GetSocket(), "Select action (A)ttack, (C)opy U(pgrade)", false, true));
                 Boolean attackMove = false;
                 Boolean copyMove = false;
                 // Inform waiting player
                 // Get command from active player
                 waitingPlayer.SendMessage("Waiting for other player's turn...", false, false);
-                activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID), true, false);
-                activePlayer.SendMessage("Select action (A)ttack, (C)opy U(pgrade)", false, true);
-
+                invoker.StartSending();
+                //activePlayer.SendMessage("Select action (A)ttack, (C)opy U(pgrade)", false, true);
+                //padaryti print grind kaip commandą kuri iškviečiama invokerio
                 //activePlayer.SendMessage("(action needed) Attack enemy's territory: (example input: \"1 2\")");
                 string type = activePlayer.ReceiveMessage()[0].ToString(); //TODO: this is a hack, need to fix message sending
                 switch (type)
