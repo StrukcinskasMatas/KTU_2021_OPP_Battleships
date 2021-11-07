@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Server
 {
-    class Player
+    class Player: IObserver
     {
         private string username;
         private Socket socket;
@@ -44,6 +44,11 @@ namespace Server
             string readData = Encoding.Default.GetString(buffer);
             Message response = JsonConvert.DeserializeObject<Message>(readData);
             return response.message;
+        }
+        public void Update(Cell[,] mapGrid)
+        {
+            Console.WriteLine("Be aware player spawned unit at random location in the map!!");
+            SendMessage("Be aware player spawned unit at random location in the map!!", false, false);
         }
     }
 }

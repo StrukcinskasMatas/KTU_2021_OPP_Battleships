@@ -45,7 +45,7 @@ namespace Server
 
 
             SetupShips();
-
+            Subscribe();
             int activePlayerID = 0;
             int winnerID = grid.GetWinnerID();
             Message message = new Message();
@@ -185,6 +185,11 @@ namespace Server
             players[1 - winnerID].SendMessage("You've lost the game!", false, false);
 
             Console.WriteLine("Game ended!");
+        }
+        private void Subscribe()
+        {
+            grid.Attach(players[0]);
+            grid.Attach(players[1]);
         }
 
         private void SetupShips()
