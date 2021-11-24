@@ -9,6 +9,7 @@ using Server.Units;
 using Server.Decorator;
 using Server.Adapter;
 using Server.Command;
+using Server.COR;
 
 namespace Server
 {
@@ -67,20 +68,25 @@ namespace Server
                 //padaryti print grind kaip commandą kuri iškviečiama invokerio
                 //activePlayer.SendMessage("(action needed) Attack enemy's territory: (example input: \"1 2\")");
                 string type = activePlayer.ReceiveMessage()[0].ToString(); //TODO: this is a hack, need to fix message sending
+                var attack = new AttackHandler();
+                var copy = new CopyHandler();
+                var upgrade = new UpgradeHandler();
+                attack.SetNext(copy).SetNext(upgrade);
+                var result = attack.Handle(type);
                 switch (type)
                 {
                     case "A":
-                        activePlayer.SendMessage("Attack enemy's territory: (example input: \"1 2\")", false, true);
+                        activePlayer.SendMessage($"{result}", false, true);
                         //shipUnit = unitFactory.CreateTank();
                         attackMove = true;
                         break;
                     case "C":
-                        activePlayer.SendMessage("Select ship to copy: (example input: \"1 2\")", false, true);
+                        activePlayer.SendMessage($"{result}", false, true);
                         //shipUnit = unitFactory.CreateUtility();
                         copyMove = true;
                         break;
                     case "U":
-                        activePlayer.SendMessage("Select ship to upgrade: (example input: \"1 2\")", false, true);
+                        activePlayer.SendMessage($"{result}", false, true);
                         //shipUnit = unitFactory.CreateUtility();
                         break;
                     default:

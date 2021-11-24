@@ -83,3 +83,21 @@ C:\Users\margin\OneDrive - Kaunas University of Technology\KTU\Ketvirtas kursas,
 C:\Users\margin\OneDrive - Kaunas University of Technology\KTU\Ketvirtas kursas, pirmas semestras\Objektinis programų projektavimas\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\ref\Client.dll
 C:\Users\margin\OneDrive - Kaunas University of Technology\KTU\Ketvirtas kursas, pirmas semestras\Objektinis programų projektavimas\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.pdb
 C:\Users\margin\OneDrive - Kaunas University of Technology\KTU\Ketvirtas kursas, pirmas semestras\Objektinis programų projektavimas\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.genruntimeconfig.cache
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Client.exe
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Client.deps.json
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Client.runtimeconfig.json
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Client.runtimeconfig.dev.json
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Client.dll
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\ref\Client.dll
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Client.pdb
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.csproj.AssemblyReference.cache
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.AssemblyInfoInputs.cache
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.AssemblyInfo.cs
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.csproj.CopyComplete
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.dll
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\ref\Client.dll
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.pdb
+C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.genruntimeconfig.cache
