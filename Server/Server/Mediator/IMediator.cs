@@ -8,7 +8,7 @@ namespace Server.Mediator
 {
     public interface IMediator
     {
-        void Notify(object sender, string ev);
+        void Notify(object sender, int id);
     }
 
 }

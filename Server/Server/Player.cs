@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Server
 {
-    class Player: IObserver
+    class Player/*: IObserver */
     {
         private string username;
         private Socket socket;
@@ -29,6 +29,7 @@ namespace Server
 
         public void SendMessage(string msg, bool clear, bool action)
         {
+            System.Threading.Thread.Sleep(100);
             Message message = new Message();
             message.setMessage(msg);
             message.actionNeeded(action);
@@ -46,10 +47,10 @@ namespace Server
             Message response = JsonConvert.DeserializeObject<Message>(readData);
             return response.message;
         }
-        public void Update(Cell[,] mapGrid)
-        {
-            Console.WriteLine("Be aware player spawned unit at random location in the map!!");
-            SendMessage("Be aware player spawned unit at random location in the map!!", false, false);
-        }
+        //public void Update(Cell[,] mapGrid)
+        //{
+        //    Console.WriteLine("Be aware player spawned unit at random location in the map!!");
+        //    SendMessage("Be aware player spawned unit at random location in the map!!", false, false);
+        //}
     }
 }

@@ -10,6 +10,7 @@ using Server.Decorator;
 using Server.Adapter;
 using Server.Command;
 using Server.COR;
+using Server.Mediator;
 
 namespace Server
 {
@@ -46,7 +47,7 @@ namespace Server
 
 
             SetupShips();
-            Subscribe();
+            //Subscribe();
             int activePlayerID = 0;
             int winnerID = grid.GetWinnerID();
             Message message = new Message();
@@ -56,6 +57,9 @@ namespace Server
                 // Define players
                 Player activePlayer = players[activePlayerID];
                 Player waitingPlayer = players[1 - activePlayerID];
+                FirstPlayer component1 = new FirstPlayer(activePlayer);
+                SecondPlayer component2 = new SecondPlayer(waitingPlayer);
+                new ConcreteMediator(component1, component2);
                 invoker.SetOnStart(new MessageSender(receiver, activePlayer.GetSocket(), this.grid.PrintGrid(activePlayerID), true, false));
                 invoker.SetOnFinish(new MessageSender(receiver, activePlayer.GetSocket(), "Select action (A)ttack, (C)opy U(pgrade)", false, true));
                 Boolean attackMove = false;
@@ -77,17 +81,14 @@ namespace Server
                 {
                     case "A":
                         activePlayer.SendMessage($"{result}", false, true);
-                        //shipUnit = unitFactory.CreateTank();
                         attackMove = true;
                         break;
                     case "C":
                         activePlayer.SendMessage($"{result}", false, true);
-                        //shipUnit = unitFactory.CreateUtility();
                         copyMove = true;
                         break;
                     case "U":
                         activePlayer.SendMessage($"{result}", false, true);
-                        //shipUnit = unitFactory.CreateUtility();
                         break;
                     default:
                         //player.SendMessage("(action needed) Invalid input.");
@@ -160,15 +161,12 @@ namespace Server
                         } else if (copyMove)
                         {
                             Units.Unit shipUnit = cell.getObj();
-                            // FIXME: TO DO - Implement case when user enters random coordinates and not the ship coordinates
                             Units.Unit newShip = (Units.Unit)shipUnit.DeepClone();
                             grid.placeShipToRandomCell(activePlayerID, newShip);
                             activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID), true, false);
                         } else
                         {
-                            Units.Unit shipUnit = cell.getObj();
-                            shipUnit.ChangeShield("Platinum");
-                            activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID), true, false);
+                            component1.UpgradeShip(cell, this.grid, activePlayerID);
                         }
                     }
                     else
@@ -192,11 +190,11 @@ namespace Server
 
             Console.WriteLine("Game ended!");
         }
-        private void Subscribe()
-        {
-            grid.Attach(players[0]);
-            grid.Attach(players[1]);
-        }
+        //private void Subscribe()
+        //{
+        //    grid.Attach(players[0]);
+        //    grid.Attach(players[1]);
+        //}
 
         private void SetupShips()
         {
