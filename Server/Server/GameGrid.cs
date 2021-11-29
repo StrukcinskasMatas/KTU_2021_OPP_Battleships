@@ -47,6 +47,16 @@ namespace Server
             return grid[x, y];
         }
 
+        public int GetSize()
+        {
+            return size;
+        }
+        
+        public Cell[,] GetGrid()
+        {
+            return grid;
+        }
+
         public string PrintGrid(int playerID)
         {
             string gridVisuals = "";
@@ -69,53 +79,6 @@ namespace Server
             }
 
             return gridVisuals;
-        }
-
-
-
-        // returns -1 if there's no winner
-        // otherwise, returns the winners ID
-        public int GetWinnerID()
-        {
-            // Run through player 0 cells
-            int aliveShips = 0;
-            for (int i = 0; i < size / 2; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    Cell cell = grid[i, j];
-                    if (cell.GetHits() == 0 && cell.GetValue() != '0')
-                    {
-                        aliveShips++;
-                    }
-                }
-            }
-            if (aliveShips == 0)
-            {
-                // player 1 won, since player 0 got no ships alive
-                return 1;
-            }
-
-            aliveShips = 0;
-            // Run through player 1 cells
-            for (int i = size / 2; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-                    Cell cell = grid[i, j];
-                    if (cell.GetHits() == 0 && cell.GetValue() != '0')
-                    {
-                        aliveShips++;
-                    }
-                }
-            }
-            if (aliveShips == 0)
-            {
-                // player 0 won, since player 1 got no ships alive
-                return 0;
-            }
-
-            return -1;
         }
 
         /// <summary>

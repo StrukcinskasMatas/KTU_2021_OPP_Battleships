@@ -101,3 +101,21 @@ C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj
 C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\ref\Client.dll
 C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.pdb
 C:\Users\Rokas\Desktop\New folder (3)\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.genruntimeconfig.cache
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\bin\Debug\net5.0\Client.exe
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\bin\Debug\net5.0\Client.deps.json
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\bin\Debug\net5.0\Client.runtimeconfig.json
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\bin\Debug\net5.0\Client.runtimeconfig.dev.json
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\bin\Debug\net5.0\Client.dll
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\bin\Debug\net5.0\ref\Client.dll
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\bin\Debug\net5.0\Client.pdb
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\obj\Debug\net5.0\Client.csprojAssemblyReference.cache
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\obj\Debug\net5.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\obj\Debug\net5.0\Client.AssemblyInfoInputs.cache
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\obj\Debug\net5.0\Client.AssemblyInfo.cs
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\obj\Debug\net5.0\Client.csproj.CoreCompileInputs.cache
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\obj\Debug\net5.0\Client.csproj.CopyComplete
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\obj\Debug\net5.0\Client.dll
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\obj\Debug\net5.0\ref\Client.dll
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\obj\Debug\net5.0\Client.pdb
+C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\obj\Debug\net5.0\Client.genruntimeconfig.cache

@@ -49,7 +49,11 @@ namespace Server
             SetupShips();
             //Subscribe();
             int activePlayerID = 0;
-            int winnerID = grid.GetWinnerID();
+
+            // WinCondition gameMode = new HitAllWin();
+            WinCondition gameMode = new FirstHitWin();
+
+            int winnerID = gameMode.GetWinnerId(grid);
             Message message = new Message();
             Message response = new Message();
             while (winnerID == -1)
@@ -183,7 +187,7 @@ namespace Server
                 activePlayerID = Math.Abs(activePlayerID - 1);
 
                 // Check game state
-                winnerID = grid.GetWinnerID();
+                winnerID = gameMode.GetWinnerId(grid);
             }
             players[winnerID].SendMessage("You've won the game!", false, false);
             players[1 - winnerID].SendMessage("You've lost the game!", false, false);
@@ -213,7 +217,7 @@ namespace Server
             player.SendMessage(this.grid.PrintGrid(playerID), true, false);
 
             Units.Creator creator = new Units.BattleshipCreator();
-            int[] shipSizes = new int[] { 1 };
+            int[] shipSizes = new int[] { 1, 1 };
 
             foreach (var shipSize in shipSizes)
             {
