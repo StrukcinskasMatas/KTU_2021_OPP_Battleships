@@ -16,6 +16,9 @@ namespace Server
 {
     class Facade
     {
+        Composite.Fleet fleet0 = new Composite.Fleet();
+        Composite.Fleet fleet1 = new Composite.Fleet();
+
         // Singleton instance
         private static Facade instance = null;
         private Facade(List<Player> players)
@@ -65,7 +68,7 @@ namespace Server
                 SecondPlayer component2 = new SecondPlayer(waitingPlayer);
                 new ConcreteMediator(component1, component2);
                 invoker.SetOnStart(new MessageSender(receiver, activePlayer.GetSocket(), this.grid.PrintGrid(activePlayerID), true, false));
-                invoker.SetOnFinish(new MessageSender(receiver, activePlayer.GetSocket(), "Select action (A)ttack, (C)opy U(pgrade)", false, true));
+                invoker.SetOnFinish(new MessageSender(receiver, activePlayer.GetSocket(), "Select action (A)ttack, (C)opy, (U)pgrade, (S)irens", false, true));
                 Boolean attackMove = false;
                 Boolean copyMove = false;
                 // Inform waiting player
@@ -161,6 +164,15 @@ namespace Server
                                     }
                                 }
                                 activePlayer.SendMessage(this.grid.PrintGrid(activePlayerID), true, false);
+
+                                if (activePlayerID == 0)
+                                {
+                                    fleet0.turnOnSirens();
+                                }
+                                else
+                                {
+                                    fleet1.turnOnSirens();
+                                }
                             }
                         } else if (copyMove)
                         {
@@ -217,7 +229,7 @@ namespace Server
             player.SendMessage(this.grid.PrintGrid(playerID), true, false);
 
             Units.Creator creator = new Units.BattleshipCreator();
-            int[] shipSizes = new int[] { 1, 1 };
+            int[] shipSizes = new int[] { 1, 2, 1 };
 
             foreach (var shipSize in shipSizes)
             {
@@ -246,6 +258,16 @@ namespace Server
 
                     break;
                 }
+
+                if (playerID == 0)
+                {
+                    fleet0.Add(shipUnit);
+                }
+                else
+                {
+                    fleet1.Add(shipUnit);
+                }
+
                 // TODO: validate input if not out of bounds
                 // TODO: validate if ship already placed
                 player.SendMessage(String.Format("Place your {0} {1} ship: (example coords input: \"1 2\")", shipUnit.GetUnitType(), shipUnit.GetSizeString()), false, true);

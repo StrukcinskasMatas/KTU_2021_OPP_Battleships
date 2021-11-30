@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Server.Units
 {
-    public abstract class Unit: ICloneable
+    public abstract class Unit : Composite.GroupedUnit, ICloneable
     {
         StatusAlive status;
         public Perk perk;
@@ -45,6 +45,16 @@ namespace Server.Units
             }
             this.perk = newPerk;
             return this.perk.skill();
+        }
+
+        public override void turnOnSirens()
+        {
+            Console.WriteLine("weeooooweoooo!@#!@3");
+        }
+
+        public override bool isUnit()
+        {
+            return true;
         }
     }
 }
