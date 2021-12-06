@@ -1,4 +1,5 @@
-﻿using Server.Units;
+﻿using Server.Memento;
+using Server.Units;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,15 @@ namespace Server.Decorator
         public override string Operation()
         {
             return $"Water Attack {base.Operation()}";
+        }
+
+        public override MementoClass SaveSchieldMemento()
+        {
+            throw new NotImplementedException();
+        }
+        public override void RestoreShiledMemeto(MementoClass memento)
+        {
+            throw new NotImplementedException();
         }
     }
 

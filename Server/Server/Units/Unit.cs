@@ -1,5 +1,6 @@
 ﻿using Server.Adapter;
 using Server.Bridge;
+using Server.Memento;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace Server.Units
         public abstract string getConfiguration();
         public abstract string Operation();
         public abstract void ChangeShield(string type);
+        public abstract MementoClass SaveSchieldMemento();
+        public abstract void RestoreShiledMemeto(MementoClass memento);
         public string ShowStatus(StatusAlive status)
         {
             this.status = status;

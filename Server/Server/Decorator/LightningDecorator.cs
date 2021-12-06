@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Server.Memento;
 
 namespace Server.Decorator
 {
@@ -56,6 +57,15 @@ namespace Server.Decorator
         public override string Operation()
         {
             return $"Lightning Attack {base.Operation()}";
+        }
+
+        public override MementoClass SaveSchieldMemento()
+        {
+            throw new NotImplementedException();
+        }
+        public override void RestoreShiledMemeto(MementoClass memento)
+        {
+            throw new NotImplementedException();
         }
     }
 }

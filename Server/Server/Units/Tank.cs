@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Memento;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -87,10 +88,19 @@ namespace Server.Units
             return clone;
         }
 
-
         public override void ChangeShield(string type)
         {
             this.Shield.ChangeType(type);
+        }
+
+        public override MementoClass SaveSchieldMemento()
+        {
+            return new MementoClass(this.Shield.type);
+        }
+
+        public override void RestoreShiledMemeto(MementoClass memento)
+        {
+            this.Shield.type = memento.shieldType;
         }
     }
 }

@@ -183,6 +183,11 @@ namespace Server
                         } else
                         {
                             component1.UpgradeShip(cell, this.grid, activePlayerID);
+                            activePlayer.SendMessage("Type R to revert, or enter to skip:", false, true);
+                            if (activePlayer.ReceiveMessage() == "R")
+                            {
+                                component1.RevertShip(cell, this.grid, activePlayerID);
+                            }
                         }
                     }
                     else
