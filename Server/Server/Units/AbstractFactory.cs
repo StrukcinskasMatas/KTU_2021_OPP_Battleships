@@ -8,7 +8,9 @@ namespace Server.Units
 {
     public abstract class AbstractFactory
     {
-        public abstract Tank CreateTank();
+        public Dictionary<char, Tank> tanks = new Dictionary<char, Tank>();
+
+        public abstract Tank CreateTank(char color);
         public abstract Utility CreateUtility();
     }
 }

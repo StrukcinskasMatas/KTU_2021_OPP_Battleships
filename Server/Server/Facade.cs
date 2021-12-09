@@ -279,11 +279,14 @@ namespace Server
 
             Units.Creator creator = new Units.BattleshipCreator();
             int[] shipSizes = new int[] { 1, 2, 1 };
+            Units.Battleship battleship;
+            Units.AbstractFactory unitFactory;
 
             foreach (var shipSize in shipSizes)
             {
-                Units.Battleship battleship = creator.CreateBattleship(shipSize);
-                Units.AbstractFactory unitFactory = battleship.GetAbstractFactory();
+                battleship = creator.CreateBattleship(shipSize);
+                unitFactory = battleship.GetAbstractFactory();
+
                 player.SendMessage("Choose your ship type: (T)ank or (U)tility:", false, true);
 
                 Units.Unit shipUnit;
@@ -295,9 +298,26 @@ namespace Server
                         case "T":
                             if (gameStateContext.GetState() == "ConcreteRunningGameState")
                             {
-                                shipUnit = unitFactory.CreateTank();
-                                shipUnit.getConfiguration();
-                                break;
+                                player.SendMessage("Choose your tank color: (G)reen or (R)ed:", false, true);
+                                string color = player.ReceiveMessage()[0].ToString();
+                                
+                                if (color.Trim() == "G")
+                                {
+                                    shipUnit = unitFactory.CreateTank(char.Parse(color));
+                                    shipUnit.getConfiguration();
+                                    break;
+
+                                }
+                                else if (color.Trim() == "R")
+                                {
+                                    shipUnit = unitFactory.CreateTank(char.Parse(color));
+                                    shipUnit.getConfiguration();
+                                    break;
+                                }
+                                else {
+                                    player.SendMessage("Invalid input.", false, true);
+                                    continue;
+                                }
                             }
                             else
                             {

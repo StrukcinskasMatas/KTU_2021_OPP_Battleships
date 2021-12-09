@@ -10,7 +10,7 @@ namespace Server.Units
     {
         public override AbstractFactory GetAbstractFactory()
         {
-            return new _1x1Factory();
+            return _1x1Factory.Instance;
         }
 
         public override string GetSizeString()

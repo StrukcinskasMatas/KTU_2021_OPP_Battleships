@@ -12,11 +12,13 @@ namespace Server.Units
         private int xLenght;
         private int yLenght;
         public Shield Shield;
-        public Tank(int x, int y, Shield shield)
+        public char color;
+        public Tank(int x, int y, Shield shield, char color)
         {
             xLenght = x;
             yLenght = y;
             this.Shield = shield;
+            this.color = color;
         }
 
         public override string GetSizeString()
@@ -52,6 +54,10 @@ namespace Server.Units
         private string body;
         private string weapon;
 
+        public char getColor() 
+        {
+            return color;
+        }
         public string getBody()
         {
             return body;
@@ -72,7 +78,7 @@ namespace Server.Units
 
         public override string getConfiguration()
         {
-            String config = GetUnitType() + " config: parts " + this.body + " | weapons " + this.weapon + " | Perks: " + this.AddPerk();
+            String config = GetUnitType() + " config: parts " + this.body + " | weapons " + this.weapon + " | Perks: " + this.AddPerk() + " | Perks: " + getColor();
             Console.WriteLine(config);
             return config;
         }
