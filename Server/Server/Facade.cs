@@ -11,6 +11,7 @@ using Server.Adapter;
 using Server.Command;
 using Server.COR;
 using Server.Mediator;
+using Server.StateFlyweightProxy;
 
 namespace Server
 {
@@ -18,6 +19,7 @@ namespace Server
     {
         Composite.Fleet fleet0 = new Composite.Fleet();
         Composite.Fleet fleet1 = new Composite.Fleet();
+        public Context gameStateContext = new Context(new ConcreteRunningGameState());
 
         // Singleton instance
         private static Facade instance = null;
@@ -47,7 +49,6 @@ namespace Server
             Invoker invoker = new Invoker();
             //invoker.SetOnStart(new SimpleCommand("Say Hi!"));
             Receiver receiver = new Receiver();
-
 
             SetupShips();
             //Subscribe();
@@ -87,19 +88,62 @@ namespace Server
                 switch (type)
                 {
                     case "A":
-                        activePlayer.SendMessage($"{result}", false, true);
-                        attackMove = true;
-                        break;
+                        if (gameStateContext.GetState() == "ConcreteRunningGameState") {
+                            activePlayer.SendMessage($"{result}", false, true);
+                            attackMove = true;
+                            break;
+                        } else
+                        {
+                            activePlayer.SendMessage("GAME IS PAUSED!!!!", false, true);
+                            continue;
+                        }
+           
                     case "C":
-                        activePlayer.SendMessage($"{result}", false, true);
-                        copyMove = true;
-                        break;
+                        if (gameStateContext.GetState() == "ConcreteRunningGameState")
+                        {
+                            activePlayer.SendMessage($"{result}", false, true);
+                            copyMove = true;
+                            break;
+                        }
+                        else {
+                            activePlayer.SendMessage("GAME IS PAUSED!!!!", false, true);
+                            continue;
+                        }
                     case "U":
-                        activePlayer.SendMessage($"{result}", false, true);
-                        break;
+                        if (gameStateContext.GetState() == "ConcreteRunningGameState")
+                        {
+                            activePlayer.SendMessage($"{result}", false, true);
+                            break;
+                        }
+                        else {
+                            activePlayer.SendMessage("GAME IS PAUSED!!!!", false, true);
+                            continue;
+                        }
+                           
+                    case "P":
+                        if (gameStateContext.GetState() == "ConcreteRunningGameState")
+                        {
+                            SendGlobalMessage("Game WAS PAUSED!", false, true);
+                            gameStateContext.RequestToChangeGameState();
+                            continue;
+                        }
+                        else {
+                            SendGlobalMessage("Game WAS UNPAUSED!", false, true);
+                            gameStateContext.RequestToChangeGameState();
+                            continue;
+                        }
+                            
                     default:
-                        //player.SendMessage("(action needed) Invalid input.");
-                        continue;
+                        if (gameStateContext.GetState() == "ConcreteRunningGameState")
+                        {
+                            activePlayer.SendMessage("Invalid input.", false, true);
+                            continue;
+                        }
+                        else
+                        {
+                            activePlayer.SendMessage("Game IS PAUSED!", false, true);
+                            continue;
+                        }
                 }
 
                 while (true)
@@ -249,16 +293,55 @@ namespace Server
                     switch (type)
                     {
                         case "T":
-                            shipUnit = unitFactory.CreateTank();
-                            shipUnit.getConfiguration();
-                            break;
+                            if (gameStateContext.GetState() == "ConcreteRunningGameState")
+                            {
+                                shipUnit = unitFactory.CreateTank();
+                                shipUnit.getConfiguration();
+                                break;
+                            }
+                            else
+                            {
+                                player.SendMessage("GAME IS PAUSED!!!!", false, true);
+                                continue;
+                            }
+
                         case "U":
-                            shipUnit = unitFactory.CreateUtility();
-                            shipUnit.getConfiguration();
-                            break;
+                            if (gameStateContext.GetState() == "ConcreteRunningGameState")
+                            {
+                                shipUnit = unitFactory.CreateUtility();
+                                shipUnit.getConfiguration();
+                                break;
+                            }
+                            else
+                            {
+                                player.SendMessage("GAME IS PAUSED!!!!", false, true);
+                                continue;
+                            }
+
+                        case "P":
+                            if (gameStateContext.GetState() == "ConcreteRunningGameState")
+                            {
+                                SendGlobalMessage("Game WAS PAUSED!", false, true);
+                                gameStateContext.RequestToChangeGameState();
+                                continue;
+                            }
+                            else
+                            {
+                                SendGlobalMessage("Game WAS UNPAUSED!", false, true);
+                                gameStateContext.RequestToChangeGameState();
+                                continue;
+                            }
                         default:
-                            player.SendMessage("Invalid input.", false, true);
-                            continue;
+                            if (gameStateContext.GetState() == "ConcreteRunningGameState")
+                            {
+                                player.SendMessage("Invalid input.", false, true);
+                                continue;
+                            }
+                            else
+                            {
+                                player.SendMessage("Game IS PAUSED!", false, true);
+                                continue;
+                            }
                     }
 
                     break;

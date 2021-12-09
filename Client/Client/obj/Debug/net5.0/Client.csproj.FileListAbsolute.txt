@@ -119,3 +119,21 @@ C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Clie
 C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\obj\Debug\net5.0\ref\Client.dll
 C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\obj\Debug\net5.0\Client.pdb
 C:\Personal\KTU\7 Semestras\Objektinis programų projektavimas\Inžinerinis\Client\Client\obj\Debug\net5.0\Client.genruntimeconfig.cache
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Client.exe
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Client.deps.json
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Client.runtimeconfig.json
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Client.runtimeconfig.dev.json
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Client.dll
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\ref\Client.dll
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Client.pdb
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.csproj.AssemblyReference.cache
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.AssemblyInfoInputs.cache
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.AssemblyInfo.cs
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.csproj.CopyComplete
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.dll
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\ref\Client.dll
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.pdb
+C:\Users\Karolis\Desktop\OPP\KTU_2021_OPP_Battleships\Client\Client\obj\Debug\net5.0\Client.genruntimeconfig.cache

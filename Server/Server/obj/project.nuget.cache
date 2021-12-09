@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "HH2lJkYtsj6UiTZouiGxkONZ0Dqfg4P5V3Qw5BaxIYGAYrD1DpJI/D2AIPYO1Zx63WZMrBT9dvQrg6aWoM540g==",
+  "dgSpecHash": "LYEAhKR8a9j/7Yg3tLD8e1OYmyGc/qBccPDtUJgoAEK6I6QTwBPvIZxyVNZeecq86JBLQIeO37UE3F/6+FShqw==",
   "success": true,
-  "projectFilePath": "C:\\Personal\\KTU\\7 Semestras\\Objektinis programų projektavimas\\Inžinerinis\\Server\\Server\\Server.csproj",
+  "projectFilePath": "C:\\Users\\Karolis\\Desktop\\OPP\\KTU_2021_OPP_Battleships\\Server\\Server\\Server.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Matas\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+    "C:\\Users\\Karolis\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],
   "logs": []
 }

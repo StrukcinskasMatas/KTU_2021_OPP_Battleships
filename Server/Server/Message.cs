@@ -13,7 +13,7 @@ namespace Server
         public string message;
         public bool action_needed;
         public bool clear_console;
-        
+
         public Message GetMessage()
         {
             Message msg = new Message
