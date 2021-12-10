@@ -6,15 +6,17 @@ using System.Text;
 
 namespace Server
 {
-    class Player/*: IObserver */
+    public class Player: IObserver
     {
         private string username;
         private Socket socket;
+        public string role;
 
-        public Player(string username, Socket socket)
+        public Player(string username, Socket socket, string role)
         {
             this.username = username;
             this.socket = socket;
+            this.role = role;
         }
 
         public string GetUsername()
@@ -47,10 +49,10 @@ namespace Server
             Message response = JsonConvert.DeserializeObject<Message>(readData);
             return response.message;
         }
-        //public void Update(Cell[,] mapGrid)
-        //{
-        //    Console.WriteLine("Be aware player spawned unit at random location in the map!!");
-        //    SendMessage("Be aware player spawned unit at random location in the map!!", false, false);
-        //}
+        public void Update(Cell[,] mapGrid)
+        {
+            Console.WriteLine("Be aware player spawned unit at random location in the map!!");
+            SendMessage("Be aware player spawned unit at random location in the map!!", false, false);
+        }
     }
 }

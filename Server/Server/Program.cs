@@ -49,9 +49,18 @@ namespace Server
             //// Get username
             response.recieve(clientSocket);
             Console.WriteLine("Connection identified: " + response.message);
+            var playerName = response.message;
+
+            message.setMessage("Please enter your role (A)dmin or (U)ser:");
+            message.actionNeeded(true);
+            message.send(clientSocket);
+            //// Get username
+            response.recieve(clientSocket);
+            Console.WriteLine("Player role: " + response.message);
+            var playerRole = response.message;
 
             //// Add the connection to players list
-            players.Add(new Player(response.message, clientSocket));
+            players.Add(new Player(playerName, clientSocket, playerRole));
             if (players.Count != 2)
             {
                 message.setMessage("Waiting for the second player to join...");

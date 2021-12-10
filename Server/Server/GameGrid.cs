@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    class Grid: ISubject
+    public class Grid: ISubject
     {
         private int size;
         private Cell[,] grid;

@@ -51,8 +51,15 @@ namespace Server
             Receiver receiver = new Receiver();
 
             SetupShips();
-            //Subscribe();
             int activePlayerID = 0;
+
+            //SharedFolderProxy folderProxy1 = new SharedFolderProxy(emp1);
+            //folderProxy1.PerformRWOperations();
+            ProxySubscription proxySubscription1 = new ProxySubscription(players[0], grid);
+            proxySubscription1.SubscribeToMapChanges();
+
+            ProxySubscription proxySubscription2 = new ProxySubscription(players[1], grid);
+            proxySubscription2.SubscribeToMapChanges();
 
             // WinCondition gameMode = new HitAllWin();
             WinCondition gameMode = new FirstHitWin();
@@ -255,11 +262,6 @@ namespace Server
 
             Console.WriteLine("Game ended!");
         }
-        //private void Subscribe()
-        //{
-        //    grid.Attach(players[0]);
-        //    grid.Attach(players[1]);
-        //}
 
         private void SetupShips()
         {
