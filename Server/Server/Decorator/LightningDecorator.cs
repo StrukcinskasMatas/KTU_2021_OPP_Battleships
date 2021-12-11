@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Server.Memento;
+using Server.Visitor;
 
 namespace Server.Decorator
 {
@@ -64,6 +65,31 @@ namespace Server.Decorator
             throw new NotImplementedException();
         }
         public override void RestoreShiledMemeto(MementoClass memento)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override double calculateMiss(HighMissChance miss)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override double calculateMiss(AvarageMissChance miss)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override double calculateMiss(LowMissChance miss)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void setPerk()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void setMissChance(double chance)
         {
             throw new NotImplementedException();
         }
