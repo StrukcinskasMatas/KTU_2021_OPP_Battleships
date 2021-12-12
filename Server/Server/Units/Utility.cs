@@ -1,4 +1,5 @@
 ﻿using Server.Memento;
+using Server.Visitor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace Server.Units
         private int xLenght;
         private int yLenght;
         public Shield Shield;
+        public string perk;
+        public double missChance;
         public Utility(int x, int y, Shield shield)
         {
             xLenght = x;
@@ -69,10 +72,17 @@ namespace Server.Units
         {
             this.weapon = weapon;
         }
-
+        public override void setPerk()
+        {
+            perk = AddPerk();
+        }
+        public override void setMissChance(double chance)
+        {
+            missChance = chance;
+        }
         public override string getConfiguration()
         {
-            String config = GetUnitType() + " config: parts " + this.body + " | weapons " + this.weapon + " | Perks: " + this.AddPerk();
+            String config = GetUnitType() + " config: parts " + this.body + " | weapons " + this.weapon + " | perks: " + perk + " | miss chance: " + missChance + "%";
             Console.WriteLine(config);
             return config;
         }
@@ -100,6 +110,18 @@ namespace Server.Units
         public override void RestoreShiledMemeto(MementoClass memento)
         {
             this.Shield.type = memento.shieldType;
+        }
+        public override double calculateMiss(HighMissChance miss)
+        {
+            return miss.chance() * 2 + 2.5;
+        }
+        public override double calculateMiss(AvarageMissChance miss)
+        {
+            return miss.chance() * 2;
+        }
+        public override double calculateMiss(LowMissChance miss)
+        {
+            return miss.chance() * 2 - 2.5;
         }
     }
 }

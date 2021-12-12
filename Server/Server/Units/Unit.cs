@@ -1,6 +1,7 @@
 ﻿using Server.Adapter;
 using Server.Bridge;
 using Server.Memento;
+using Server.Visitor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,11 @@ namespace Server.Units
         public abstract void ChangeShield(string type);
         public abstract MementoClass SaveSchieldMemento();
         public abstract void RestoreShiledMemeto(MementoClass memento);
+        public abstract double calculateMiss(HighMissChance miss);
+        public abstract double calculateMiss(AvarageMissChance miss);
+        public abstract double calculateMiss(LowMissChance miss);
+        public abstract void setPerk();
+        public abstract void setMissChance(double chance);
         public string ShowStatus(StatusAlive status)
         {
             this.status = status;
@@ -32,7 +38,7 @@ namespace Server.Units
         public string AddPerk()
         {
             Random rnd = new Random();
-            int num = rnd.Next(2);
+            int num = rnd.Next(3);
             Perk newPerk;
             if(num == 0)
             {

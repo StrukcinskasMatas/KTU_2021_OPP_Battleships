@@ -12,6 +12,7 @@ using Server.Command;
 using Server.COR;
 using Server.Mediator;
 using Server.StateFlyweightProxy;
+using Server.Visitor;
 
 namespace Server
 {
@@ -20,6 +21,9 @@ namespace Server
         Composite.Fleet fleet0 = new Composite.Fleet();
         Composite.Fleet fleet1 = new Composite.Fleet();
         public Context gameStateContext = new Context(new ConcreteRunningGameState());
+        MissMethod method1 = new HighMissChance();
+        MissMethod method2 = new AvarageMissChance();
+        MissMethod method3 = new LowMissChance();
 
         // Singleton instance
         private static Facade instance = null;
@@ -306,6 +310,8 @@ namespace Server
                                 if (color.Trim() == "G")
                                 {
                                     shipUnit = unitFactory.CreateTank(char.Parse(color));
+                                    shipUnit.setPerk();
+                                    shipUnit.setMissChance(findMissChanceByPerk(shipUnit));
                                     shipUnit.getConfiguration();
                                     break;
 
@@ -313,6 +319,8 @@ namespace Server
                                 else if (color.Trim() == "R")
                                 {
                                     shipUnit = unitFactory.CreateTank(char.Parse(color));
+                                    shipUnit.setPerk();
+                                    shipUnit.setMissChance(findMissChanceByPerk(shipUnit));
                                     shipUnit.getConfiguration();
                                     break;
                                 }
@@ -331,6 +339,8 @@ namespace Server
                             if (gameStateContext.GetState() == "ConcreteRunningGameState")
                             {
                                 shipUnit = unitFactory.CreateUtility();
+                                shipUnit.setPerk();
+                                shipUnit.setMissChance(findMissChanceByPerk(shipUnit));
                                 shipUnit.getConfiguration();
                                 break;
                             }
@@ -368,7 +378,7 @@ namespace Server
 
                     break;
                 }
-
+                //shipUnit.perk.skill()
                 if (playerID == 0)
                 {
                     fleet0.Add(shipUnit);
@@ -451,6 +461,15 @@ namespace Server
                 player.SendMessage("Please choose an existing explosion type: small, medium, big", false, false);
                 return default;
             }
+        }
+        private double findMissChanceByPerk(Unit shipUnit)
+        {
+            if (shipUnit.perk.skill() == "Slow")
+                return method3.addMissChance(shipUnit);
+            else if (shipUnit.perk.skill() == "Durable")
+                return method2.addMissChance(shipUnit);
+            else
+                return method1.addMissChance(shipUnit);
         }
     }
 }
