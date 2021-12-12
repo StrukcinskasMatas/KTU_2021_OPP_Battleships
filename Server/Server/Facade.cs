@@ -32,10 +32,16 @@ namespace Server
             Console.WriteLine("Game singleton initialized.");
             this.players = players;
             this.grid = new Grid(10);
+            this.playersCollection = new Iterator.PlayersCollection();
+            foreach (Player player in players)
+            {
+                playersCollection.AddItem(player);
+            }
         }
 
         private Grid grid;
         private List<Player> players;
+        private Iterator.PlayersCollection playersCollection;
 
         public static Facade getInstance(List<Player> players)
         {
@@ -59,11 +65,13 @@ namespace Server
 
             //SharedFolderProxy folderProxy1 = new SharedFolderProxy(emp1);
             //folderProxy1.PerformRWOperations();
-            ProxySubscription proxySubscription1 = new ProxySubscription(players[0], grid);
-            proxySubscription1.SubscribeToMapChanges();
 
-            ProxySubscription proxySubscription2 = new ProxySubscription(players[1], grid);
-            proxySubscription2.SubscribeToMapChanges();
+            // Iterator use #3
+            foreach(Player player in playersCollection)
+            {
+                ProxySubscription proxySubscription = new ProxySubscription(player, grid);
+                proxySubscription.SubscribeToMapChanges();
+            }
 
             // WinCondition gameMode = new HitAllWin();
             WinCondition gameMode = new FirstHitWin();
@@ -284,13 +292,21 @@ namespace Server
             player.SendMessage(this.grid.PrintGrid(playerID), true, false);
 
             Units.Creator creator = new Units.BattleshipCreator();
-            int[] shipSizes = new int[] { 1, 2, 1 };
             Units.Battleship battleship;
             Units.AbstractFactory unitFactory;
 
-            foreach (var shipSize in shipSizes)
+            // Iterator use #1
+            var unitsCollection = new Iterator.UnitsCollection();
+
+            // Iterator use #2
+            var shipSizesCollection = new Iterator.ShipSizesCollection();
+            shipSizesCollection.AddItem(new Iterator.ShipSize(1));
+            shipSizesCollection.AddItem(new Iterator.ShipSize(2));
+            shipSizesCollection.AddItem(new Iterator.ShipSize(1));
+
+            foreach (Iterator.ShipSize shipSize in shipSizesCollection)
             {
-                battleship = creator.CreateBattleship(shipSize);
+                battleship = creator.CreateBattleship(shipSize.GetShipSize());
                 unitFactory = battleship.GetAbstractFactory();
 
                 player.SendMessage("Choose your ship type: (T)ank or (U)tility:", false, true);
@@ -388,6 +404,8 @@ namespace Server
                     fleet1.Add(shipUnit);
                 }
 
+                unitsCollection.AddItem(shipUnit);
+
                 // TODO: validate input if not out of bounds
                 // TODO: validate if ship already placed
                 player.SendMessage(String.Format("Place your {0} {1} ship: (example coords input: \"1 2\")", shipUnit.GetUnitType(), shipUnit.GetSizeString()), false, true);
@@ -418,6 +436,11 @@ namespace Server
                     player.SendMessage(this.grid.PrintGrid(playerID), true, false);
                     break;
                 }
+            }
+
+            foreach (var element in unitsCollection)
+            {
+                Console.WriteLine($"Player {playerID} unit - {element}");
             }
         }
 
