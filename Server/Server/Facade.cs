@@ -13,6 +13,7 @@ using Server.COR;
 using Server.Mediator;
 using Server.StateFlyweightProxy;
 using Server.Visitor;
+using Server.Interpreter;
 
 namespace Server
 {
@@ -20,7 +21,7 @@ namespace Server
     {
         Composite.Fleet fleet0 = new Composite.Fleet();
         Composite.Fleet fleet1 = new Composite.Fleet();
-        public Context gameStateContext = new Context(new ConcreteRunningGameState());
+        public StateFlyweightProxy.Context gameStateContext = new StateFlyweightProxy.Context(new ConcreteRunningGameState());
         MissMethod method1 = new HighMissChance();
         MissMethod method2 = new AvarageMissChance();
         MissMethod method3 = new LowMissChance();
@@ -55,6 +56,7 @@ namespace Server
 
         public void StartGame()
         {
+
             SendGlobalMessage("Game is starting!", true, false);
             Invoker invoker = new Invoker();
             //invoker.SetOnStart(new SimpleCommand("Say Hi!"));
@@ -99,11 +101,28 @@ namespace Server
                 //padaryti print grind kaip commandą kuri iškviečiama invokerio
                 //activePlayer.SendMessage("(action needed) Attack enemy's territory: (example input: \"1 2\")");
                 string type = activePlayer.ReceiveMessage()[0].ToString(); //TODO: this is a hack, need to fix message sending
+                Interpreter.Context context = new Interpreter.Context(type);
+                // Build the 'parse tree'
+                List<AbstractExpression> tree = new List<AbstractExpression>();
+                tree.Add(new AttackExpression());
+                tree.Add(new CopyExpression());
+                tree.Add(new SirenExpression());
+                tree.Add(new UpgradeExpression());
+                // Interpret
+                foreach (AbstractExpression exp in tree)
+                {
+                    exp.Interpret(context);
+                }
+                Console.WriteLine("{0} Action selected", context.Output);
+                string messageCommand = $"{context.Output} Action selected";
+                activePlayer.SendMessage(messageCommand, false, false);
+
                 var attack = new AttackHandler();
                 var copy = new CopyHandler();
                 var upgrade = new UpgradeHandler();
                 attack.SetNext(copy).SetNext(upgrade);
                 var result = attack.Handle(type);
+    
                 switch (type)
                 {
                     case "A":
